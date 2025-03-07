@@ -14,8 +14,12 @@ main{
 section{
   width: 100%;
 }
-section h2{
+section h2,h3{
   text-align: center;
+}
+section h4{
+  text-decoration: underline;
+  margin-bottom: 1rem;
 }
 .section-commands{
   padding: 1rem;
@@ -25,7 +29,7 @@ section h2{
 }
 .section-commands p{
   display: grid;
-  grid-template-columns: 10rem auto;
+  grid-template-columns: 7rem auto;
   margin-bottom: 1rem;
   opacity: .95;
 }
@@ -39,6 +43,9 @@ sup{
   opacity: 1;
   color: #ff8811;
 }
+strong{
+  display: contents;
+}
 
 @media(width>=1024px){
   section{
@@ -48,5 +55,6 @@ sup{
 @media(width>=1500px){
   section{
     flex: 1 0 32%;
+    max-width: 33%;
   }
 }

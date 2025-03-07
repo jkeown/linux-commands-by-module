@@ -16,6 +16,7 @@
 <section>
 
   <h2>Module 1</h2>
+  <h3>Basic Commands</h3>
   <div class="section-commands">
 
     <p><span class="command">ls</span> List directory contents</p>
@@ -35,9 +36,9 @@
     <p><span class="command">uname</span> Prints system information</p>
     <p><span class="command">whoami</span> Prints effective user ID</p>
     <p><span class="command">passwd</span> Change password</p>
-    <p><span class="command">less</span> Reads a file (paginates)</p>
-    <p><span class="command">head</span> Reads the first 10 lines of a file</p>
-    <p><span class="command">tail</span> Reads the last 10 lines of a file</p>
+    <p><span class="command">less</span> Displays a file (paginates)</p>
+    <p><span class="command">head</span> Displays the first 10 lines of a file</p>
+    <p><span class="command">tail</span> Displays the last 10 lines of a file</p>
     <p><span class="command">find</span> Locates files on a system in real time</p>
     <p><span class="command">grep</span> Searches for a string in file</p>
     <p><span class="command">sort</span> Organizes text in a file</p>
@@ -54,7 +55,7 @@
 <section>
 
   <h2>Module 2</h2>
-
+  <h3>Directory Structure</h3>
   <div class="section-commands">
     <p><span class="command">cp</span>Copy files and directories</p>
     <p><span class="command">mv</span>Move or rename files and directories</p>
@@ -75,7 +76,7 @@
 <section>
 
   <h2>Module 3</h2>
-
+  <h3>User Management</h3>
   <div class="section-commands">
     <p><span class="command">useradd</span>Create a new user</p>
     <p><span class="command">usermod</span>Modify a user account</p>
@@ -92,7 +93,36 @@
     <p><span class="command">visudo</span>Make changes to the sudoers file</p>
     <p><span class="command">shutdown</span>Power down machine</p>
     <p><span class="command">lid</span>List users in a group (-g)</p>
-    <p><span class="command">newgrp</span>Change the current group ID during a login session. <sup title="A user can temporarily change their primary group using newgrp, after which all newly created files are owned by the new group">&#128712;</sup></p>
+    <p><span class="command">newgrp</span>Change the current group ID during a login session <sup title="A user can temporarily change their primary group using newgrp, after which all newly created files are owned by the new group">&#128712;</sup></p>
+  </div>
+  
+</section>
+
+<section>
+
+  <h2>Module 4</h2>
+  <h3>File Permissions</h3>
+  <div class="section-commands">
+    <p><span class="command">chmod</span>Change file permissions</p>
+    <p><span class="command">chown</span>Change owner/group of a file</p>
+    <p><span class="command">umask</span>Determines how file
+      permissions are set for newly created files</p>
+    <!-- <p><span class="command">setuid</span>Allows user to run as Owner</p> -->
+    <!-- <p><span class="command">setgid</span>Allows group to run as Group Owner</p> -->
+    <p><span class="command">getfacl</span>View ACLs of a file (current settings)</p>
+    <p><span class="command">setfacl</span>Modify ACL to set permissions for a user</p> 
+    <p><span class="command">cat</span>Sequentially read file(s) & writing them to standard output</p> 
+    <p><span class="command">more</span>View contents of a text file one screen at a time</p> 
+    <p><span class="command">less</span>Same as 'more' but with the ability to navigate backwards</p>
+    <p><span class="command">head</span> Prints the first 10 lines of a file</p>
+    <p><span class="command">tail</span> Prints the last 10 lines of a file</p>
+    <p><span class="command">grep</span> SearDisplay plain-text data sets for lines that match a regular expression</p>
+    <h4>Redirection & Piping</h4> 
+    <p><span class="command">></span>Output redirection - commonly used to write output to a file (overwrites existing data)</p> 
+    <p><span class="command">>></span>Output redirection - commonly used to <strong>append</strong> output to a file</p> 
+    <p><span class="command">2></span>Standard error - commonly used to NOT show errors <sup title="( 2> /dev/null )">&#128712;</sup></p> 
+    <p><span class="command"><</span>Redirection standard input - sends data to preceding command (reverse of <strong>></strong>)</p> 
+    <p><span class="command">|</span>Sends the output of a command to another command as input <sup title="This is the 'pipe' character NOT L or I">&#128712;</sup></p> 
   </div>
   
 </section>
