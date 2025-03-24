@@ -39,9 +39,14 @@ section h4{
   letter-spacing: 1px;
 }
 sup{
-  display: contents;
-  opacity: 1;
-  color: #ff8811;
+  display: none;
+}
+@media(width >= 1024px){
+  sup{
+    display: contents;
+    opacity: 1;
+    color: #ff8811;
+  }
 }
 strong{
   display: contents;
