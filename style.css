@@ -53,6 +53,42 @@ sup{
 strong{
   display: contents;
 }
+footer{
+  padding: 1rem;
+  background: #000000;
+  color: #ffffff;
+  margin-top: 75px;
+}
+footer img {
+	position: relative;
+	top: -85px;
+	margin-inline: auto;
+	margin-bottom: -85px;
+}
+footer h4{
+  font-size: 2rem;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/* Spray Painted X Effect */
+.spray-paint-x{
+  position: relative;
+}
+.spray-paint-x::before {
+  content: "";
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  background-image: url('red-s.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: -.45rem;
+  left: -1.55rem;
+}
+
+/* END Spray Painted X Effect */
 
 @container (width >= 822px) {
   p.initial{
