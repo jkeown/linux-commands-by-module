@@ -53,6 +53,17 @@ sup{
 strong{
   display: contents;
 }
+a.link{
+  background: #832161;
+  background: #9600d4;
+  color: #ffffff;
+  padding: .5rem;
+  display: inline-block;
+  border-radius: .25rem;
+  margin-top: 1rem;
+  text-transform: full-width;
+  font-weight: 600;
+}
 footer{
   padding: 1rem;
   background: #000000;
@@ -89,6 +100,11 @@ footer h4{
 }
 
 /* END Spray Painted X Effect */
+
+img.construction{
+  object-fit: contain;
+  margin-inline: auto;
+}
 
 @container (width >= 822px) {
   p.initial{
