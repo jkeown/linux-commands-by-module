@@ -38,7 +38,7 @@ section h4{
 }
 p.initial{
   display: inline-block;
-  /* text-align: center; */
+  opacity: .8;
   width: 100%;
   margin-bottom: 0;
 }
@@ -77,34 +77,29 @@ footer img {
 	margin-bottom: -85px;
 }
 footer h4{
-  font-size: 2rem;
+  opacity: .8;
   text-align: center;
   letter-spacing: 1px;
 }
 
-/* Spray Painted X Effect */
-.spray-paint-x{
+/* Spray Painted Effect */
+.spray-paint{
   position: relative;
 }
-.spray-paint-x::before {
+.spray-paint::before {
   content: "";
   display: block;
-  width: 4rem;
-  height: 4rem;
+  width: 2rem;
+  height: 2rem;
   background-image: url('purple-s.png');
   background-size: contain;
   background-repeat: no-repeat;
   position: absolute;
-  top: -.45rem;
-  left: -1.55rem;
+  top: -.3rem;
+  left: -.55rem;
 }
 
-/* END Spray Painted X Effect */
-
-img.construction{
-  object-fit: contain;
-  margin-inline: auto;
-}
+/* END Spray Painted Effect */
 
 @container (width >= 822px) {
   p.initial{
@@ -119,6 +114,17 @@ img.construction{
     display: contents;
     opacity: 1;
     color: #ff8811;
+  }
+  a.link{
+    color: #832161;
+    background: transparent;
+    border: .25rem solid #832161;
+    transition: all 500ms ease;
+  }
+  a.link:hover{
+    color: #ffffff;
+    background: #832161;
+    /* border: none; */
   }
 }
 @media(width>=1500px){
