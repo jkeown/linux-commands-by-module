@@ -34,6 +34,7 @@
     <p><span class="command">cat</span> Concatenate and display file content</p>
     <p><span class="command">echo</span> Displays arguments to the screen</p>
     <p><span class="command">man</span> Display the manual page for a command</p>
+    <p><span class="command">[command] --help</span>Brief summary of how to use a command <sup title="Brackets [ ] are not part of syntax">&#128712;</sup></p>
     <p><span class="command">exit</span> Exits the shell or current user session</p>
     <p><span class="command">clear</span> Clears the screen completely</p>
     <p><span class="command">ctrl + L</span> Clears the screen but previous output is still scrollable</p>
@@ -58,6 +59,7 @@
     <p><span class="command">vi</span>Create / Edit files</p>
     <p><span class="command">vim</span>Vi but with more features</p>
     <p><span class="command">view</span>Open Vi in read-only mode</p>    
+    <p><span class="command">setfont</span>Set the console font in a terminal session.  Double current font size: setfont -d</p>    
   </div>
 </section>
 
@@ -199,7 +201,13 @@
     <p><span class="command">ssh</span>Connect securely to remote machines</p>
     <p><span class="command">ssh-keygen</span>Generate, manage, convert SSH authentication keys <sup title="often recommended: -t rsa -b 4096 -C '-C if you want comments'">&#128712;</sup></p>
     <p><span class="command">scp</span>Securely transfer files and directories between a local and a remote system, or between two remote systems (Secure Copy Protocol)</p>
-    <p><span class="command"></span></p>
+    <p><span class="command">dnf</span>Install, update, and remove software</p>
+    <p><span class="command">yum</span>Replaced by dnf but still works at time of writing</p>
+    <p><span class="command">hostname</span>Display or set the system's hostname (see next)</p>
+    <p><span class="command">hostnamectl set-hostname</span>Recommended way to set the hostname (particularly on systemd)</p>
+    <p><span class="command">exec [command]</span>execute a command in place of the current shell. The current shell process is replaced with the command you specify, and it does not return to the original shell once the command completes <sup title="Brackets [ ] are not part of syntax">&#128712;</sup></p>
+    <p><span class="command">exec bash</span>Replaces the current shell session with a new instance of Bash</p>
+    <p><span class="command">netstat</span>powerful tool used for monitoring network connections, routing tables, and interface statistics. Commonly used as: netstat -tulpn</p>
   </div>
 
 </section>
