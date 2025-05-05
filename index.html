@@ -218,6 +218,7 @@
   <h3>Storage</h3>
   <div class="section-commands">
     <p><span class="command">fdisk</span>Create, delete, and manage disk partitions. BE AWARE that fdisk is a dangerous tool and should be used with extreme caution. Only root or sudoers can manipulate the partition tables</p>
+    <p><span class="command">gdisk</span>Creating, deleting, and modifying partitions on disks that use the GPT format, which is a modern standard for partition tables. GUID Partition Table (GPT)</p>
     <p><span class="command">lsblk</span>List information about all available or specified block devices. It shows how devices are connected and provides information about their partitions, sizes, types, and mount points. This command is particularly useful for understanding the layout of your storage devices</p>
     <p><span class="command">mkfs</span>Create a file system on a specified storage device/partition. Process involves formatting the device</p>
     <p><span class="command">mount</span>Attach filesystem/runtime to a specified directory in the file system hierarchy</p>
@@ -239,7 +240,7 @@
     <p><span class="command">tar</span>(tape archive) Used for archiving files/directories into a single archive file (tarball), which can be compressed for easier storage/transfer. Common tar files: gzip or bzip2</p>
     <p><span class="command">du</span>Estimate file space usage-space
       used under a particular directory or files on a file system</p>
-    <p><span class="command"></span></p>
+    <p><span class="command">partprobe</span>Prompts kernel to re-read partition tables without needing reboot (when fdisk gives device busy notification)</p>
     
   </div>
   
