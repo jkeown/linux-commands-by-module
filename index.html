@@ -211,6 +211,39 @@
   </div>
 
 </section>
+
+<section>
+
+  <h2>Module 7</h2>
+  <h3>Storage</h3>
+  <div class="section-commands">
+    <p><span class="command">fdisk</span>Create, delete, and manage disk partitions. BE AWARE that fdisk is a dangerous tool and should be used with extreme caution. Only root or sudoers can manipulate the partition tables</p>
+    <p><span class="command">lsblk</span>List information about all available or specified block devices. It shows how devices are connected and provides information about their partitions, sizes, types, and mount points. This command is particularly useful for understanding the layout of your storage devices</p>
+    <p><span class="command">mkfs</span>Create a file system on a specified storage device/partition. Process involves formatting the device</p>
+    <p><span class="command">mount</span>Attach filesystem/runtime to a specified directory in the file system hierarchy</p>
+    <p><span class="command">umount</span>Safely detach filesystem/runtime from hierarchy, ensuring that all data is written properly and that no processes are using the mounted file system</p>
+    <p><span class="command">df</span>Report file system disk space usage</p>
+    <p><span class="command">pvcreate</span>Create a physical volume for use with Logical Volume Manager (LVM)</p>
+    <p><span class="command">vgcreate</span>Create a volume group (VG) in Logical Volume Manager (LVM)</p>
+    <p><span class="command">lvcreate</span>Create a new logical volume within a volume group in Logical Volume Management (LVM). Allocate space for file systems or applications dynamically</p>
+    <p><span class="command">pvs</span>Verify/display information about physical volumes in a volume group</p>
+    <p><span class="command">lvextend</span>Increase the size of an existing logical volume in a volume group managed by Logical Volume Management (LVM). This allows you to dynamically allocate more space to a logical volume as needed</p>
+    <p><span class="command">vgextend</span>Add one or more physical volumes to an existing volume group in Logical Volume Management (LVM). This allows you to increase the size of the volume group and make additional space available for logical volumes</p>
+    <p><span class="command">vgs</span>Verify/display information about volume groups managed by Logical Volume Management (LVM)</p>
+    <p><span class="command">resize2fs</span>Resize an ext2, ext3, or ext4 filesystem. This command allows you to expand or shrink the filesystem size without losing data, provided you have sufficient space <sup title="Use if you forgot the -r in the lvextend command">&#128712;</sup></p>
+    <p><span class="command">xfs_growfs</span>Expand an XFS filesystem. Unlike some other filesystems, XFS supports online resizing, which means you can increase the size of the filesystem while it is mounted and in use</p>
+    <p><span class="command">mkswap</span>Create a Linux swap area (filesystem) on a device or a file <sup title="Swap does not get mounted to a directory, but into a kernel interface instead.">&#128712;</sup></p>
+    <p><span class="command">swapon</span>Enable swap space</p>
+    <p><span class="command">swapoff</span>Disable swap space</p>
+    <p><span class="command">free</span>Display memory usage, including swap space. Helpful options: -m -h</p>
+    <p><span class="command">tar</span>(tape archive) Used for archiving files/directories into a single archive file (tarball), which can be compressed for easier storage/transfer. Common tar files: gzip or bzip2</p>
+    <p><span class="command">du</span>Estimate file space usage-space
+      used under a particular directory or files on a file system</p>
+    <p><span class="command"></span></p>
+    
+  </div>
+  
+</section>
   
   </main>
   <footer>
