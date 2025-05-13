@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partitioning Party</title>
+  <link rel="stylesheet" href="reset.css">
+  <style>
+    pre{
+  background: black;
+  color: white;
+}
+code .output{
+  opacity: .8;
+}
+.prompt{
+  color: green;
+  /* opacity: 1; */
+}
+.command{
+  font-weight: 600;
+}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="narration">
+      <p>The network team has just added two drives to one of the dev servers. It's time to have a partition party! I've ssh'd into the dev server. Let's take a look with <span class="command">lsblk</span>. The output shows two new 10 GB drives named sdb and sdc.</p>
+    </div>
+    <pre>
+    <code>
+    <span class='prompt'><span class='prompt'>[sorad@dev9 ~]$</span></span> lsblk
+    <span class="output">
+      NAME             MAJ:MIN RM SIZE RO TYPE MOUNTPOINTS
+      sda                8:0    0  20G  0 disk 
+      ├─sda1             8:1    0   1G  0 part /boot
+      └─sda2             8:2    0  19G  0 part 
+      ├─cs_vbox-root 253:0    0  17G  0 lvm  /
+      └─cs_vbox-swap 253:1    0   2G  0 lvm  [SWAP]
+      sdb                8:16   0  10G  0 disk 
+      sdc                8:32   0  10G  0 disk 
+    </span>
+    </code>
+    </pre>
+
+    <div class="narration">
+      <p>We can also view this using <span class="command">fdisk -l</span> which will display the same info and a bit more. Let's try it.</p>
+    </div>
+    <pre>
+    <code>
+    <span class='prompt'><span class='prompt'>[sorad@dev9 ~]$</span></span> fdisk -l
+    <span class="output">
+      fdisk: cannot open /dev/sda: Permission denied
+      fdisk: cannot open /dev/sdb: Permission denied
+      fdisk: cannot open /dev/sdc: Permission denied
+      fdisk: cannot open /dev/mapper/cs_vbox-root: Permission denied
+      fdisk: cannot open /dev/mapper/cs_vbox-swap: Permission denied
+    </span>
+    </code>
+    </pre>
+
+    <div class="narration">
+      <p>Permission denied! Looks like elevated permissions are needed. Let's check if Sorad is in the wheel group.  Here's a couple of ways we can check. I know <span class="command">id</span> is probably the simplest but <span class="command">grep</span> is fun.</p>
+    </div>
+    <pre>
+    <code>
+    <span class='prompt'><span class='prompt'>[sorad@dev9 ~]$</span></span> grep wheel /etc/group
+    <span class="output">
+      wheel:x:10:sorad
+    </span>
+    <span class='prompt'><span class='prompt'>[sorad@dev9 ~]$</span></span> groups
+    <span class="output">
+      sorad wheel team1 hr
+    </span>
+    </code>
+    </pre>
+
+     <div class="narration">
+      <p>Sorad is a sudoer so there's no need to switch users. Let's proceed.</p>
+    </div>
+
+    <pre>
+    <code>
+    <span class='prompt'><span class='prompt'>[sorad@dev9 ~]$</span></span> sudo fdisk -l
+    <span class="out">
+      [sudo] password for sorad: 
+      Disk /dev/sda: 20 GiB, 21474836480 bytes, 41943040 sectors
+      Disk model: VBOX HARDDISK   
+      Units: sectors of 1 * 512 = 512 bytes
+      Sector size (logical/physical): 512 bytes / 512 bytes
+      I/O size (minimum/optimal): 512 bytes / 512 bytes
+      Disklabel type: dos
+      Disk identifier: 0xdde0aa1b
+      
+      Device     Boot   Start      End  Sectors Size Id Type
+      /dev/sda1  *       2048  2099199  2097152   1G 83 Linux
+      /dev/sda2       2099200 41943039 39843840  19G 8e Linux LVM
+      
+      
+      Disk /dev/sdb: 10 GiB, 10737418240 bytes, 20971520 sectors
+      Disk model: VBOX HARDDISK   
+      Units: sectors of 1 * 512 = 512 bytes
+      Sector size (logical/physical): 512 bytes / 512 bytes
+      I/O size (minimum/optimal): 512 bytes / 512 bytes
+      Disklabel type: dos
+      Disk identifier: 0x5ace204b
+      
+      
+      Disk /dev/sdc: 10 GiB, 10737418240 bytes, 20971520 sectors
+      Disk model: VBOX HARDDISK   
+      Units: sectors of 1 * 512 = 512 bytes
+      Sector size (logical/physical): 512 bytes / 512 bytes
+      I/O size (minimum/optimal): 512 bytes / 512 bytes
+      Disklabel type: dos
+      Disk identifier: 0x3b6f1a7c
+      
+      
+      Disk /dev/mapper/cs_vbox-root: 17 GiB, 18249416704 bytes, 35643392 sectors
+      Units: sectors of 1 * 512 = 512 bytes
+      Sector size (logical/physical): 512 bytes / 512 bytes
+      I/O size (minimum/optimal): 512 bytes / 512 bytes
+      
+      
+      Disk /dev/mapper/cs_vbox-swap: 2 GiB, 2147483648 bytes, 4194304 sectors
+      Units: sectors of 1 * 512 = 512 bytes
+      Sector size (logical/physical): 512 bytes / 512 bytes
+      I/O size (minimum/optimal): 512 bytes / 512 bytes
+    </span>
+    </code>
+    </pre>
+
+    <div class="narration">
+      <p>Ok, time to do some work. The <span class="command">fdisk</span> utility is used to create partitions. I'd like to point out that 'Changes will remain in memory only, until you decide to write them'. I've selected the fdisk option <span class="command">p</span> to display the current partition table which shows a blank slate.</p>
+    </div>
+
+    <pre>
+      <code>
+        <span class='prompt'><span class='prompt'>[sorad@dev9 ~]$</span></span> sudo fdisk /dev/sdb
+        <span class="output">
+          
+          Welcome to fdisk (util-linux 2.37.4).
+          Changes will remain in memory only, until you decide to write them.
+          Be careful before using the write command.
+          
+          
+          Command (m for help): p
+          Disk /dev/sdb: 10 GiB, 10737418240 bytes, 20971520 sectors
+          Disk model: VBOX HARDDISK   
+          Units: sectors of 1 * 512 = 512 bytes
+          Sector size (logical/physical): 512 bytes / 512 bytes
+          I/O size (minimum/optimal): 512 bytes / 512 bytes
+          Disklabel type: dos
+          Disk identifier: 0x5ace204b
+        </span>
+        </code>
+    </pre>
+
+    <div class="narration">
+      <p>Next I use option <span class="command">n</span> to create a new partition. For the most part, I'll select the fdisk defaults as they are very helpful when selecting the partition and sector boundaries. I'll only need to specify the end of the sectors by specifying the amount of space the partition will have.  I'll create the first partition as 2 GB by entering <span class="command">+2G</span> for the 'Last sector' input. Using <span class="command">p</span> again, we'll see the new 2 GB partion on sdb.</p>
+    </div>
+
+    <pre>
+      <code>
+        Command (m for help): n
+        Partition type
+        p   primary (0 primary, 0 extended, 4 free)
+        e   extended (container for logical partitions)
+        Select (default p): 
+        
+        Using default response p.
+        Partition number (1-4, default 1): 
+        First sector (2048-20971519, default 2048): 
+        Last sector, +/-sectors or +/-size{K,M,G,T,P} (2048-20971519, default 20971519): +2G
+        
+        Created a new partition 1 of type 'Linux' and of size 2 GiB.
+        
+        Command (m for help): p
+        Disk /dev/sdb: 10 GiB, 10737418240 bytes, 20971520 sectors
+        Disk model: VBOX HARDDISK   
+        Units: sectors of 1 * 512 = 512 bytes
+        Sector size (logical/physical): 512 bytes / 512 bytes
+        I/O size (minimum/optimal): 512 bytes / 512 bytes
+        Disklabel type: dos
+        Disk identifier: 0x5ace204b
+        
+        Device     Boot Start     End Sectors Size Id Type
+        /dev/sdb1        2048 4196351 4194304   2G 83 Linux
+      </pre>
+        </code>
+
+
+        <div class="narration">
+          <p>Creating the next two partitions involves the same process. Notice how fdisk keeps track of partitions and defaults.</p>
+        </div>
+
+        <pre>
+      <code>
+        Command (m for help): n
+        Partition type
+        p   primary (1 primary, 0 extended, 3 free)
+        e   extended (container for logical partitions)
+        Select (default p): 
+        
+        Using default response p.
+        Partition number (2-4, default 2): 
+        First sector (4196352-20971519, default 4196352): 
+        Last sector, +/-sectors or +/-size{K,M,G,T,P} (4196352-20971519, default 20971519): +2G
+        
+        Created a new partition 2 of type 'Linux' and of size 2 GiB.
+        
+        Command (m for help): n
+        Partition type
+        p   primary (2 primary, 0 extended, 2 free)
+        e   extended (container for logical partitions)
+        Select (default p): 
+        
+        Using default response p.
+        Partition number (3,4, default 3): 
+        First sector (8390656-20971519, default 8390656): 
+        Last sector, +/-sectors or +/-size{K,M,G,T,P} (8390656-20971519, default 20971519): +2G
+
+        Created a new partition 3 of type 'Linux' and of size 2 GiB.
+
+        Command (m for help): 
+      </pre>
+</code>
+
+<div class="narration">
+          <p>When it's time to create the fourth partition, fdisk intelligently defaults to the extended partition, allowing for future logical partitions. To best maximize the remaining disk space, all default choices will be used.</p>
+        </div>
+
+<pre>
+      <code>
+    Command (m for help): n
+    Partition type
+      p   primary (3 primary, 0 extended, 1 free)
+      e   extended (container for logical partitions)
+    Select (default e): 
+
+    Using default response e.
+    Selected partition 4
+    First sector (12584960-20971519, default 12584960): 
+    Last sector, +/-sectors or +/-size{K,M,G,T,P} (12584960-20971519, default 20971519): 
+
+    Created a new partition 4 of type 'Extended' and of size 4 GiB.
+
+    Command (m for help): p
+    Disk /dev/sdb: 10 GiB, 10737418240 bytes, 20971520 sectors
+    Disk model: VBOX HARDDISK   
+    Units: sectors of 1 * 512 = 512 bytes
+    Sector size (logical/physical): 512 bytes / 512 bytes
+    I/O size (minimum/optimal): 512 bytes / 512 bytes
+    Disklabel type: dos
+    Disk identifier: 0x5ace204b
+
+    Device     Boot    Start      End Sectors Size Id Type
+    /dev/sdb1           2048  4196351 4194304   2G 83 Linux
+    /dev/sdb2        4196352  8390655 4194304   2G 83 Linux
+    /dev/sdb3        8390656 12584959 4194304   2G 83 Linux
+    /dev/sdb4       12584960 20971519 8386560   4G  5 Extended
+      </pre>
+    </code>
+
+    <div class="narration">
+          <p>Since the fourth partition is extended, it is not recognized as being writable itself. We still have 4 GB of disk storage we can use. Let's continue with our 2 GB partitions.  Notice again how fdisk defaults recognize that future partitions will be logical.</p>
+        </div>
+
+    <pre>
+      <code>
+    Command (m for help): n
+    All primary partitions are in use.
+    Adding logical partition 5
+    First sector (12587008-20971519, default 12587008): 
+    Last sector, +/-sectors or +/-size{K,M,G,T,P} (12587008-20971519, default 20971519): +2G
+
+    Created a new partition 5 of type 'Linux' and of size 2 GiB.
+
+    Command (m for help): n
+    All primary partitions are in use.
+    Adding logical partition 6
+    First sector (16783360-20971519, default 16783360): 
+    Last sector, +/-sectors or +/-size{K,M,G,T,P} (16783360-20971519, default 20971519): 
+
+    Created a new partition 6 of type 'Linux' and of size 2 GiB.
+
+    Command (m for help): p
+    Disk /dev/sdb: 10 GiB, 10737418240 bytes, 20971520 sectors
+    Disk model: VBOX HARDDISK   
+    Units: sectors of 1 * 512 = 512 bytes
+    Sector size (logical/physical): 512 bytes / 512 bytes
+    I/O size (minimum/optimal): 512 bytes / 512 bytes
+    Disklabel type: dos
+    Disk identifier: 0x5ace204b
+
+    Device     Boot    Start      End Sectors Size Id Type
+    /dev/sdb1           2048  4196351 4194304   2G 83 Linux
+    /dev/sdb2        4196352  8390655 4194304   2G 83 Linux
+    /dev/sdb3        8390656 12584959 4194304   2G 83 Linux
+    /dev/sdb4       12584960 20971519 8386560   4G  5 Extended
+    /dev/sdb5       12587008 16781311 4194304   2G 83 Linux
+    /dev/sdb6       16783360 20971519 4188160   2G 83 Linux
+      </pre>
+    </code>
+
+    <div class="narration">
+          <p>Just above, we see all of our new partitions utilizing all of the disk.  What would happen if we try to create another partition?</p>
+        </div>
+
+    <pre>
+      <code>
+    Command (m for help): n
+    All primary partitions are in use.
+    Adding logical partition 7
+    <span style="color:red;">No free sectors available.</span>
+
+    </code>
+    </pre>
+
+    <div class="narration">
+          <p>All the partitions are still in memory. Let's finalize the newly partitioned disk by writing it using <span class="command">w</span>. If this command is skipped the entire creation process will need to be repeated. Use <span class="command">lsblk</span> again to check our work.</p>
+        </div>
+
+    <pre>
+      <code>
+
+    Command (m for help): w
+
+    The partition table has been altered.
+    Calling ioctl() to re-read partition table.
+    Syncing disks.
+
+    <span class='prompt'><span class='prompt'>[sorad@dev9 ~]$</span></span> lsblk
+    NAME             MAJ:MIN RM SIZE RO TYPE MOUNTPOINTS
+    sda                8:0    0  20G  0 disk 
+    ├─sda1             8:1    0   1G  0 part /boot
+    └─sda2             8:2    0  19G  0 part 
+      ├─cs_vbox-root 253:0    0  17G  0 lvm  /
+      └─cs_vbox-swap 253:1    0   2G  0 lvm  [SWAP]
+    sdb                8:16   0  10G  0 disk 
+    ├─sdb1             8:17   0   2G  0 part 
+    ├─sdb2             8:18   0   2G  0 part 
+    ├─sdb3             8:19   0   2G  0 part 
+    ├─sdb4             8:20   0   1K  0 part 
+    ├─sdb5             8:21   0   2G  0 part 
+    └─sdb6             8:22   0   2G  0 part 
+    sdc                8:32   0  10G  0 disk
+    </code>
+    </pre>
+
+    <div class="narration">
+          <p>Alrighty, good work so far! But there's still one more drive to set up. How can we work a bit more efficiently this time? Checking the utility's menu is a good place to start. The <span class="command">m</span> option will open it. Do you see any options that could be helpful?</p>
+        </div>
+
+        <pre>
+      <code>
+
+        Command (m for help): m
+
+        Help:
+
+          GPT
+          M   enter protective/hybrid MBR
+
+          Generic
+          d   delete a partition
+          F   list free unpartitioned space
+          l   list known partition types
+          n   add a new partition
+          p   print the partition table
+          t   change a partition type
+          v   verify the partition table
+          i   print information about a partition
+
+          Misc
+          m   print this menu
+          x   extra functionality (experts only)
+          
+          <span style="border: 2px solid orange;">Script</span>
+          I   load disk layout from sfdisk script file
+          O   dump disk layout to sfdisk script file
+
+          Save & Exit
+          w   write table to disk and exit
+          q   quit without saving changes
+
+          Create a new label
+          g   create a new empty GPT partition table
+          G   create a new empty SGI (IRIX) partition table
+          o   create a new empty DOS partition table
+          s   create a new empty Sun partition table
+
+      </pre>
+   </code>
+
+   <div class="narration">
+          <p>Seems we can partition programmatically and fdisk can help us create the script using <span class="command">O</span> (capital) then use that script with <span class="command">I</span> (capital i).  Time to test it out! </p>
+        </div>
+
+        <pre>
+      <code>
+        <span class='prompt'>[sorad@dev9 ~]$</span> sudo fdisk /dev/sdb
+        [sudo] password for sorad: 
+
+        Welcome to fdisk (util-linux 2.37.4).
+        Changes will remain in memory only, until you decide to write them.
+        Be careful before using the write command.
+
+
+        Command (m for help): O
+
+        Enter script file name: disk_layout
+
+        Script successfully saved.
+
+        Command (m for help): q
+      </pre>
+    </code>
+
+    <div class="narration">
+          <p>The partition scheme has been created in a file named disk_layout. Let's check the contents. </p>
+        </div>
+
+        <pre>
+      <code>
+        <span class='prompt'>[sorad@dev9 ~]$</span> cat disk_layout 
+        label: dos
+        label-id: 0x5ace204b
+        device: /dev/sdb
+        unit: sectors
+        sector-size: 512
+
+        /dev/sdb1 : start=        2048, size=     4194304, type=83
+        /dev/sdb2 : start=     4196352, size=     4194304, type=83
+        /dev/sdb3 : start=     8390656, size=     4194304, type=83
+        /dev/sdb4 : start=    12584960, size=     8386560, type=5
+        /dev/sdb5 : start=    12587008, size=     4194304, type=83
+        /dev/sdb6 : start=    16783360, size=     4188160, type=83
+      </pre>
+    </code>
+
+    <div class="narration">
+          <p>Pretty straightforward if you ask me. I wonder though, since the partitions are labeled here as sdb, can this script be applied to sdc?</p>
+        </div>
+
+        <pre>
+      <code>
+        <span class='prompt'>[sorad@dev9 ~]$</span> sudo fdisk /dev/sdc
+
+        Welcome to fdisk (util-linux 2.37.4).
+        Changes will remain in memory only, until you decide to write them.
+        Be careful before using the write command.
+
+
+        Command (m for help): p
+        Disk /dev/sdc: 10 GiB, 10737418240 bytes, 20971520 sectors
+        Disk model: VBOX HARDDISK   
+        Units: sectors of 1 * 512 = 512 bytes
+        Sector size (logical/physical): 512 bytes / 512 bytes
+        I/O size (minimum/optimal): 512 bytes / 512 bytes
+        Disklabel type: dos
+        Disk identifier: 0x3b6f1a7c
+
+        Command (m for help): I
+
+        Enter script file name: disk_layout
+
+        Created a new DOS disklabel with disk identifier 0x5ace204b.
+        Created a new partition 1 of type 'Linux' and of size 2 GiB.
+        Created a new partition 2 of type 'Linux' and of size 2 GiB.
+        Created a new partition 3 of type 'Linux' and of size 2 GiB.
+        Created a new partition 4 of type 'Extended' and of size 4 GiB.
+        Created a new partition 5 of type 'Linux' and of size 2 GiB.
+        Created a new partition 6 of type 'Linux' and of size 2 GiB.
+        Script successfully applied.
+
+        Command (m for help): p
+        Disk /dev/sdc: 10 GiB, 10737418240 bytes, 20971520 sectors
+        Disk model: VBOX HARDDISK   
+        Units: sectors of 1 * 512 = 512 bytes
+        Sector size (logical/physical): 512 bytes / 512 bytes
+        I/O size (minimum/optimal): 512 bytes / 512 bytes
+        Disklabel type: dos
+        Disk identifier: 0x5ace204b
+
+        Device     Boot    Start      End Sectors Size Id Type
+        /dev/sdc1           2048  4196351 4194304   2G 83 Linux
+        /dev/sdc2        4196352  8390655 4194304   2G 83 Linux
+        /dev/sdc3        8390656 12584959 4194304   2G 83 Linux
+        /dev/sdc4       12584960 20971519 8386560   4G  5 Extended
+        /dev/sdc5       12587008 16781311 4194304   2G 83 Linux
+        /dev/sdc6       16783360 20971519 4188160   2G 83 Linux
+
+        Command (m for help): w
+        The partition table has been altered.
+        Calling ioctl() to re-read partition table.
+        Syncing disks.
+
+        <span class='prompt'>[sorad@dev9 ~]$</span> lsblk
+        NAME             MAJ:MIN RM SIZE RO TYPE MOUNTPOINTS
+        sda                8:0    0  20G  0 disk 
+        ├─sda1             8:1    0   1G  0 part /boot
+        └─sda2             8:2    0  19G  0 part 
+          ├─cs_vbox-root 253:0    0  17G  0 lvm  /
+          └─cs_vbox-swap 253:1    0   2G  0 lvm  [SWAP]
+        sdb                8:16   0  10G  0 disk 
+        ├─sdb1             8:17   0   2G  0 part 
+        ├─sdb2             8:18   0   2G  0 part 
+        ├─sdb3             8:19   0   2G  0 part 
+        ├─sdb4             8:20   0   1K  0 part 
+        ├─sdb5             8:21   0   2G  0 part 
+        └─sdb6             8:22   0   2G  0 part 
+        sdc                8:32   0  10G  0 disk 
+        ├─sdc1             8:33   0   2G  0 part 
+        ├─sdc2             8:34   0   2G  0 part 
+        ├─sdc3             8:35   0   2G  0 part 
+        ├─sdc4             8:36   0   1K  0 part 
+        ├─sdc5             8:37   0   2G  0 part 
+        └─sdc6             8:38   0   2G  0 part
+      </pre>
+</code>
+
+<div class="narration">
+          <p>All the steps check out! We've saved some time by partitioning the sdc disk using the scheme from disk sdb. Pretty neat!</p>
+          <p>Please chime in with any questions, comments, or concerns.</p>
+          <p>In the next article, we'll look at adding file systems to the new partitions.</p>
+        </div>
+
+
+  </main>
+</body>
+</html>
