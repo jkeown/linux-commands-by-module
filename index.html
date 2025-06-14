@@ -201,7 +201,7 @@
     <p><span class="command">ssh-keygen</span>Generate, manage, convert SSH authentication keys <sup title="often recommended: -t rsa -b 4096 -C '-C if you want comments'">&#128712;</sup></p>
     <p><span class="command">scp</span>Securely transfer files and directories between a local and a remote system, or between two remote systems (Secure Copy Protocol)</p>
     <p><span class="command">dnf</span>Install, update, and remove software</p>
-    <p><span class="command">yum</span>Replaced by dnf but still works at time of writing</p>
+    <p><span class="command">dnf</span>Replaced by dnf but still works at time of writing</p>
     <p><span class="command">hostname</span>Display or set the system's hostname (see next)</p>
     <p><span class="command">hostnamectl set-hostname</span>Recommended way to set the hostname (particularly on systemd)</p>
     <p><span class="command">exec [command]</span>Execute a command in place of the current shell. The current shell process is replaced with the command you specify, and it does not return to the original shell once the command completes <sup title="Brackets [ ] are not part of syntax">&#128712;</sup></p>
@@ -252,8 +252,8 @@
   <h3>Software Management</h3>
   <div class="section-commands container">
     <p><span class="command">rpm</span>RPM is not used much on newer versions of RHEL for installing packages. Still used for managing, researching, and interacting with <strong>installed</strong> packages <sup title="Red Hat Package Manager">&#128712;</sup></p>
-    <p><span class="command">yum</span>Install, update, and manage software packages and their dependencies easily. Replaced by DNF <sup title="Yellowdog Updater Modified">&#128712;</sup></p>
-    <p><span class="command">dnf</span>Next-generation replacement for YUM, with a focus on performance and improved dependency resolution. Improved performance, better dependency management, and a more straightforward API for developers. Generally faster and uses less memory than YUM. Provides better dependency resolution and has features like transaction history, which is not present in YUM.<sup title="Dandified YUM">&#128712;</sup></p>
+    <p><span class="command">dnf</span>Install, update, and manage software packages and their dependencies easily. Replaced by DNF <sup title="Yellowdog Updater Modified">&#128712;</sup></p>
+    <p><span class="command">dnf</span>Next-generation replacement for dnf, with a focus on performance and improved dependency resolution. Improved performance, better dependency management, and a more straightforward API for developers. Generally faster and uses less memory than dnf. Provides better dependency resolution and has features like transaction history, which is not present in dnf.<sup title="Dandified dnf">&#128712;</sup></p>
     <p><span class="command">rpm -qa</span>Lists all installed packages</p>
     <p><span class="command">rpm -qf</span>Query which package a specific file belongs to. Specify <strong>path to file</strong> when using command</p>
     <p><span class="command">rpm -ql</span>List all the files installed by a specific package. This is helpful when you want to see what files a particular package has installed on your system</p>
@@ -269,16 +269,26 @@
     <p><span class="command">dnf install</span>Install the package and any dependencies. Use -y to skip prompts</p>
     <p><span class="command">dnf remove</span>Uninstall the package and any dependencies. Use -y to skip prompts</p>
     <p><span class="command">dnf upgrade</span>Updates all installed packages. Ensures that your software is up to date with the latest versions and security patches available in the configured repositories. Specify the package name if only desiring to update a single package. <strong>This command will remove prior versions of the package(s)</strong></p>
-    <p><span class="command">dnf update</span>Same as dnf upgrade except it <strong>keeps the previous version</strong> of the package</p>
+    <p><span class="command">dnf update</span>Same as dnf upgrade except it <strong>keeps the previous version</strong> of the package. Running this command without a package name will update your entire system, including the kernel</p>
     <p><span class="command">dnf provides</span>Find which package provides a specific file or functionality. Using the wildcard character (*) when searching for executables may help to ensure that you get the correct results</p>
     <p><span class="command">dnf repolist</span>Displays a terse list of repositories that are configured on your Linux system using the DNF package manager. This command helps you quickly check which repositories are enabled and available for package management</p>
     <p><span class="command">dnf repoinfo</span>Displays detailed information about the enabled repositories on a Linux system</p>
-    <p><span class="command">dnf clean all</span>Clean up cached package data. Helps to free up disk space and can resolve issues related to package management <sup title="It's good practice to clean the cache regularly, especially on systems with limited disk space or when you frequently install and uninstall packages">&#128712;</sup></p>
-    <p><span class="command"></span></p>
-    <p><span class="command"></span></p>
+    <p><span class="command">dnf clean all</span>Clean up cached package data. Helps to free up disk space and can resolve issues related to package management. Good idea to run this before dnf update <sup title="It's good practice to clean the cache regularly, especially on systems with limited disk space or when you frequently install and uninstall packages">&#128712;</sup></p>
+    <p><span class="command">dnf history</span>List or recently issued commands</p>
+    <p><span class="command">dnf history undo</span>Revert a specific package transaction that was previously executed using the DNF package manager. This is particularly useful if an update or installation caused issues and you want to restore your system to its previous state</p>
+    <p><span class="command">dnf groups</span>Shows number of available groups <sup title="Package groups are collections of related packages that are grouped together for easier installation or removal. This feature is particularly useful for setting up a system with a specific role or functionality, like a web server, database server, or development environment">&#128712;</sup></p>
+    <p><span class="command">dnf groups list</span>Lists all available package groups, including those that are installed and those that are available for installation</p>
+    <p><span class="command">dnf groups list hidden</span>Shows an exhaustive list of all groups including the hidden groups. Hidden groups are those that are not intended to be shown to users by default, either because they are for internal use or are not commonly needed for general installation</p>
+    <p><span class="command">dnf groups info</span>Displays a description of the group, the packages that belong to it, and other relevant details</p>
+    <p><span class="command">dnf groups install</span>Installs a specific dnf package group</p>
+    <p><span class="command">hostnamectl</span>Shows info about your system's hostname configuration, hardware characteristics, and related properties including the kernel</p>
+    <p><span class="command">grub2-set-default</span>Used to set the default boot entry for the GRUB2 bootloader in Linux systems. This command allows you to specify which operating system or kernel version should be loaded automatically when the system starts, eliminating the need to manually select it from the GRUB menu each time <sup title="/boot/grub2/grub.cfg">&#128712;</sup></p>
+    <p><span class="command">grubby</span>Used to manage GRUB2 bootloader configurations. It allows you to modify bootloader settings, such as the default kernel, kernel parameters, and other options related to the boot process. The grubby tool simplifies the process of modifying boot entries without directly editing configuration files</p>
+    <p><span class="command">dnf check-update</span>Check if there are any updates available for the kernel (or any other packages)</p>
+    <p><span class="command">dnf update kernel</span>Update only the kernel. Keeps previous kernel versions</p>
+    <p><span class="command">dnf upgrade kernel</span>Upgrade only the kernel</p>
     
 
-    
   </div>
 
 </section>
