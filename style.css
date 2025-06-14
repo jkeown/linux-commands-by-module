@@ -32,11 +32,11 @@ section h4{
 }
 .section-commands p{
   display: grid;
-  grid-template-columns: 7rem auto;
-  margin-bottom: 1rem;
-  opacity: .95;
+  /* grid-template-columns: 7rem auto; */
+  margin-bottom: 1.1rem;
+  opacity: .9;
 }
-p.initial{
+p.footnote{
   display: inline-block;
   opacity: .8;
   width: 100%;
@@ -44,9 +44,13 @@ p.initial{
 }
 .command{
   font-weight: 600;
-  opacity: .9;
-  letter-spacing: 1px;
+  font-size: 1.2rem;
+  letter-spacing: 1.5px;
+  text-decoration: underline;
+  text-underline-offset: 7px;
+  text-decoration-color: hsla(255, 100%, 100%, 0.5);
 }
+
 sup{
   display: none;
 }
