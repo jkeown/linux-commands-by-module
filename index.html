@@ -276,6 +276,7 @@
     <p><span class="command">dnf clean all</span>Clean up cached package data. Helps to free up disk space and can resolve issues related to package management. Good idea to run this before dnf update <sup title="It's good practice to clean the cache regularly, especially on systems with limited disk space or when you frequently install and uninstall packages">&#128712;</sup></p>
     <p><span class="command">dnf history</span>List or recently issued commands</p>
     <p><span class="command">dnf history undo</span>Revert a specific package transaction that was previously executed using the DNF package manager. This is particularly useful if an update or installation caused issues and you want to restore your system to its previous state</p>
+    <p><span class="command">dnf history rollback</span>Undo recent changes without having to completely remove & replace the package</p>
     <p><span class="command">dnf groups</span>Shows number of available groups <sup title="Package groups are collections of related packages that are grouped together for easier installation or removal. This feature is particularly useful for setting up a system with a specific role or functionality, like a web server, database server, or development environment">&#128712;</sup></p>
     <p><span class="command">dnf groups list</span>Lists all available package groups, including those that are installed and those that are available for installation</p>
     <p><span class="command">dnf groups list hidden</span>Shows an exhaustive list of all groups including the hidden groups. Hidden groups are those that are not intended to be shown to users by default, either because they are for internal use or are not commonly needed for general installation</p>
@@ -284,10 +285,40 @@
     <p><span class="command">hostnamectl</span>Shows info about your system's hostname configuration, hardware characteristics, and related properties including the kernel</p>
     <p><span class="command">grub2-set-default</span>Used to set the default boot entry for the GRUB2 bootloader in Linux systems. This command allows you to specify which operating system or kernel version should be loaded automatically when the system starts, eliminating the need to manually select it from the GRUB menu each time <sup title="/boot/grub2/grub.cfg">&#128712;</sup></p>
     <p><span class="command">grubby</span>Used to manage GRUB2 bootloader configurations. It allows you to modify bootloader settings, such as the default kernel, kernel parameters, and other options related to the boot process. The grubby tool simplifies the process of modifying boot entries without directly editing configuration files</p>
+    <p><span class="command">grubby --default-kernel</span>Check the default kernel. *Not supported on all systems*</p>
     <p><span class="command">dnf check-update</span>Check if there are any updates available for the kernel (or any other packages)</p>
     <p><span class="command">dnf update kernel</span>Update only the kernel. Keeps previous kernel versions</p>
     <p><span class="command">dnf upgrade kernel</span>Upgrade only the kernel</p>
-    
+    <p><span class="command">lslogins</span>Display info about user accounts such as login names, UID, groups, last login time, etc</p>
+    <hr>
+    <div class="dropdown" id="dropdown">
+  <div class="dropdown-header">
+    <span>Additional Info</span>
+    <span class="arrow">▼</span>
+  </div>
+  <div class="dropdown-content">
+    <div class="dropdown-content-inner">
+      <p>It was mentioned that dnf update keeps previous versions, while dnf upgrade does not. However, according to YT Genius and some googling, this may no longer be the case.</p>
+      <h5>Google:</h5>
+      <p>In modern DNF, dnf update and dnf upgrade are essentially the same. dnf update is now an alias for dnf upgrade, meaning both commands perform the same function: they update all installed packages to their latest versions. The primary command for updating packages in DNF is upgrade, and update is retained as a convenience alias</p>
+      <h5>YT Genius:</h5>
+      <p>The dnf update and dnf upgrade commands in the DNF package manager are often used interchangeably, but there are subtle differences in their intent and behavior, primarily regarding the types of package changes they address.</p>
+
+      <p>dnf update:</p>
+      <p>This command is used to update installed packages to their latest versions. It can also install new packages if the updated version requires additional dependencies that are not currently installed.
+      <p>The term "update" implies that it will handle both security and regular updates for existing packages.</p>
+
+      <p>dnf upgrade:</p>
+
+      <p>The dnf upgrade command is more focused on upgrading installed packages to their latest versions, similar to dnf update. However, it explicitly allows changes to the package set, meaning it can remove packages if newer versions require it.
+      The term "upgrade" implies that it will handle not only updates but also scenarios where packages may be replaced or removed as part of the upgrade process.
+
+      <p>While both commands are designed to update your system, the key distinction is that dnf upgrade is more aggressive and can remove packages if necessary, while dnf update typically focuses on simply bringing existing packages to their latest versions without removing them.</p>
+
+      <p>In practical use, many users find that either command will achieve the same result in most scenarios; however, understanding this difference can help you choose the right command depending on your needs.</p>
+      </div>
+  </div>
+</div>
 
   </div>
 
@@ -298,5 +329,7 @@
     <img src="linux_surf.png" alt="Surfing Linux Penguin" height="100" width="122">
     <h4>Made with Aloha for my <span class="spray-paint"></span>&nbsp;&nbsp;&nbsp;ophos</h4>
   </footer>
+
+  <script src="app.js"></script>
   </body>
   </html>

@@ -103,6 +103,55 @@ footer h4{
   left: -.55rem;
 }
 
+/* DROPDOWN */
+.dropdown {
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .dropdown-header {
+      padding: 15px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      transition: background 0.3s;
+    }
+
+    .dropdown-header:hover {
+      background: hsl(0, 0%, 10%);
+    }
+
+    .arrow {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    /* Rotate arrow when open */
+    .dropdown.open .arrow {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .4s ease;
+    }
+
+    .dropdown.open .dropdown-header {
+      background: hsl(0, 0%, 10%);
+    }
+    .dropdown.open .dropdown-content {
+      max-height: 90rem; 
+    }
+
+    .dropdown-content-inner {
+      padding: 1rem;
+    }
+/* END DROPDOWN */
+
 /* END Spray Painted Effect */
 
 @container (width >= 822px) {
