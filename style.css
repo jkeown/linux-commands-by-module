@@ -144,7 +144,7 @@ footer h4{
       background: hsl(0, 0%, 10%);
     }
     .dropdown.open .dropdown-content {
-      max-height: 90rem; 
+      max-height: 140rem; 
     }
 
     .dropdown-content-inner {
@@ -158,6 +158,9 @@ footer h4{
   p.initial{
     text-align: center;
   }
+  .dropdown.open .dropdown-content {
+      max-height: 90rem; 
+    }
 }
 @media(width>=1024px){
   section{

@@ -290,38 +290,56 @@
     <p><span class="command">dnf update kernel</span>Update only the kernel. Keeps previous kernel versions</p>
     <p><span class="command">dnf upgrade kernel</span>Upgrade only the kernel</p>
     <p><span class="command">lslogins</span>Display info about user accounts such as login names, UID, groups, last login time, etc</p>
-    <hr>
+
     <div class="dropdown" id="dropdown">
-  <div class="dropdown-header">
-    <span>Additional Info</span>
-    <span class="arrow">▼</span>
-  </div>
-  <div class="dropdown-content">
-    <div class="dropdown-content-inner">
-      <p>It was mentioned that dnf update keeps previous versions, while dnf upgrade does not. However, according to YT Genius and some googling, this may no longer be the case.</p>
-      <h5>Google:</h5>
-      <p>In modern DNF, dnf update and dnf upgrade are essentially the same. dnf update is now an alias for dnf upgrade, meaning both commands perform the same function: they update all installed packages to their latest versions. The primary command for updating packages in DNF is upgrade, and update is retained as a convenience alias</p>
-      <h5>YT Genius:</h5>
-      <p>The dnf update and dnf upgrade commands in the DNF package manager are often used interchangeably, but there are subtle differences in their intent and behavior, primarily regarding the types of package changes they address.</p>
-
-      <p>dnf update:</p>
-      <p>This command is used to update installed packages to their latest versions. It can also install new packages if the updated version requires additional dependencies that are not currently installed.
-      <p>The term "update" implies that it will handle both security and regular updates for existing packages.</p>
-
-      <p>dnf upgrade:</p>
-
-      <p>The dnf upgrade command is more focused on upgrading installed packages to their latest versions, similar to dnf update. However, it explicitly allows changes to the package set, meaning it can remove packages if newer versions require it.
-      The term "upgrade" implies that it will handle not only updates but also scenarios where packages may be replaced or removed as part of the upgrade process.
-
-      <p>While both commands are designed to update your system, the key distinction is that dnf upgrade is more aggressive and can remove packages if necessary, while dnf update typically focuses on simply bringing existing packages to their latest versions without removing them.</p>
-
-      <p>In practical use, many users find that either command will achieve the same result in most scenarios; however, understanding this difference can help you choose the right command depending on your needs.</p>
+      <div class="dropdown-header">
+        <span>Additional Info</span>
+        <span class="arrow">▼</span>
       </div>
-  </div>
-</div>
+      <div class="dropdown-content">
+        <div class="dropdown-content-inner">
+          <p>It was mentioned that dnf update keeps previous versions, while dnf upgrade does not. However, according to YT Genius and some googling, this may no longer be the case.</p>
+          <h5>Google:</h5>
+          <p>In modern DNF, dnf update and dnf upgrade are essentially the same. dnf update is now an alias for dnf upgrade, meaning both commands perform the same function: they update all installed packages to their latest versions. The primary command for updating packages in DNF is upgrade, and update is retained as a convenience alias</p>
+          <h5>YT Genius:</h5>
+          <p>Both dnf update and dnf upgrade commands typically retain the last two versions of the kernel by default. This allows users to have a backup option in case the latest kernel introduces any issues.</p>
+          <p>The dnf update and dnf upgrade commands in the DNF package manager are often used interchangeably, but there are subtle differences in their intent and behavior, primarily regarding the types of package changes they address.</p>
 
-  </div>
+          <p>dnf update:</p>
+          <p>This command is used to update installed packages to their latest versions. It can also install new packages if the updated version requires additional dependencies that are not currently installed.
+          <p>The term "update" implies that it will handle both security and regular updates for existing packages.</p>
 
+          <p>dnf upgrade:</p>
+
+          <p>The dnf upgrade command is more focused on upgrading installed packages to their latest versions, similar to dnf update. However, it explicitly allows changes to the package set, meaning it can remove packages if newer versions require it.
+          The term "upgrade" implies that it will handle not only updates but also scenarios where packages may be replaced or removed as part of the upgrade process.
+
+          <p>While both commands are designed to update your system, the key distinction is that dnf upgrade is more aggressive and can remove packages if necessary, while dnf update typically focuses on simply bringing existing packages to their latest versions without removing them.</p>
+
+          <p>In practical use, many users find that either command will achieve the same result in most scenarios; however, understanding this difference can help you choose the right command depending on your needs.</p>
+          </div>
+      </div>
+    </div><!-- dropdown section-->
+  </div>
+</section>
+
+<section>
+
+  <h2>Module 9</h2>
+  <h3>Scripting in Bash</h3>
+  <div class="section-commands">
+    <p><span class="command">chmod + x</span>Set the script to executable so it can be ran. Of course, set to user, group, or other as needed</p>
+    <p><span class="command">#!</span>Included at the top of the script file to specify which Bash shell interpreter to use. If not included in the script, the current shell will be used, which may cause the script to not execute properly. <strong>#!/bin/bash</strong> is usually a safe and common choice <sup title="Pronounced shebang">&#128712;</sup></p>
+    <p><span class="command">./</span>If the script is in your current working directory (PWD), type ./script_name.sh to execute it. A full or relative path can also be used without including ./ before the script name. If the script is in your PATH, it can be executed by just typing its name</p>
+    <p><span class="command">&</span>Run script in background. <small>SYNTAX:</small> ./my_script.sh &</p>
+    <p><span class="command">$</span>Used to reference or access the content stored in a variable. Curly braces are sometimes required. <small>SYNTAX:</small> $MY_VARIABLE or ${MY_VARIABLE}</p>
+    <p><span class="command">#</span>Hash marks comments inside a script file</p>
+    <p><span class="command">read</span>Used inside a script to get user input and store it in a variable</p>
+    <p><span class="command">source</span>Runs the script in the current shell environment, rather than starting a new shell process (subshell). This is particularly useful for running scripts that set environment variables or define functions that you want to use in your current session</p>
+    
+    
+  </div>
+  
 </section>
   
   </main>
