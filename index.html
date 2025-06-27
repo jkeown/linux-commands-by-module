@@ -341,6 +341,61 @@
   </div>
   
 </section>
+
+<section>
+
+  <h2>Module 10</h2>
+  <h3>Troubleshooting</h3>
+  <div class="section-commands">
+    <p><span class="command">dmesg</span>Prints the kernel ring buffer information, which is also found in <strong>/var/log/dmesg</strong></p>
+    <p><span class="command">grep -i 'string' /path/to/your/logfile.log</span>Search for a string in the log file <sup title="-i is used for a case-insensitive search">&#128712;</sup></p>
+    <p><span class="command">grep -i 'error' /path/to/your/logfile.log | less</span>search for a particular string and pipe to less to be able to scroll up and down (ideal when the file is very busy) <sup title="-i is used for a case-insensitive search">&#128712;</sup></p>
+    <p><span class="command">tail -f /path/to/your/logfile.log</span>Monitor the log file in real time. <small>EXAMPLE:</small><strong>tail -f /var/log/messages</strong></p>
+    <p><span class="command">w</span>Shows who is logged on, what they are doing, etc..
+The header of the the output shows (in this order): the current time, how long the system
+has been running, how many users are currently logged on, and the system load averages
+for the past 1, 5, and 15 minutes <sup title="Same data as the 'uptime' command">&#128712;</sup></p>
+    <p><span class="command">df -h</span>Monitor file system space usage in human-readable format</p>
+    <p><span class="command">df -i</span>Monitor file system inode availability</p>
+    <p><span class="command">mount -o remount,rw /filesystem</span>Useful in troubleshooting scenarios when a filesystem is mounted as read-only, preventing modifications. Remounting it with read-write permissions allows you to access logs, repair filesystem issues, or change configurations necessary for resolving problems</p>
+    <p><span class="command">lsof</span>Lists the information about the files that are
+opened by various processes</p>
+    <p><span class="command">lsof /path/to/log/file</span>List only the processes which opened a specific file, by providing the filename as the argument</p>
+    <p><span class="command">lsof -c</span>List the files opened by process names starting with a string. <small>EXAMPLE:</small> <strong>lsof -c ssh</strong></p>
+    <p><span class="command">lsof -p 'PID'</span>List all the files opened by a specific process ID</p>
+    <p><span class="command">lsof -i</span>List all the network connections opened</p>
+    <p><span class="command">lsof -i :'port/protocol'</span>List all the network connections opened by port/protocol. <small>EXAMPLE:</small> <strong>lsof -i :443</strong> or <strong>lsof -i :https</strong></p>
+    <p><span class="command">free</span>Monitor memory use and availability</p>
+    <p><span class="command">ps</span>Status of running processes with a unique PID</p>
+    <p><span class="command">ps -ef</span>Shows all processes (e for everything) in full format (f for long/full format)</p>
+    <p><span class="command">ps -aux</span>Shows all processes for all users with CPU and memory usage</p>
+    <p><span class="command">ps -ef | grep -i 'service_name'</span>Info about a particular service</p>
+    <p><span class="command">top</span>Shows all processes in real time</p>
+    <p><span class="command">top -user 'username'</span>Shows processes owned by a specific user</p>
+    <p><span class="command">kill 'PID'</span>Sends SIGTERM (signal 15) for the specified PID, which requests the process to terminate gracefully</p>
+    <p><span class="command">ip a</span>Displays detailed information about the network interfaces including ip addresses</p>
+    <p><span class="command">netstat -tulpn</span>Displays detailed information about network connections, listening ports, and the programs associated with them. <br>-t: Show TCP connections.
+<br>-u: Show UDP connections.
+<br>-l: Display only listening sockets (ports that are open and waiting for incoming connections).
+<br>-p: Show the process identifier (PID) and the name of the program to which each socket belongs.
+<br>-n: Show numerical addresses instead of resolving hostnames (this speeds up output and avoids DNS lookups)</p>
+    <p><span class="command">firewall-cmd --list-all</span>Displays comprehensive information about the current firewall configuration</p>
+    <p><span class="command">traceroute 'hostname'</span>Used to track the path that packets take from one host to another on the internet. It provides information about each hop along the route, including the time taken for each hop, which can help identify network bottlenecks or points of failure</p>
+    <p><span class="command">cat /etc/services</span>List of port numbers and services</p>
+    <p><span class="command">ping</span>Checks the network connectivity between your system and a specified host. It sends ICMP (Internet Control Message Protocol) echo request packets to the target host and waits for a reply</p>
+    <p><span class="command">dmidecode | grep -i 'Vendor'</span>Determine if you are working on a physical server or a VM. Retrieves hardware information from the system's DMI (Desktop Management Interface) table</p>
+    <p><span class="command"></span></p>
+    <p><span class="command"></span></p>
+    <p><span class="command"></span></p>
+    <p><span class="command"></span></p>
+    <p><span class="command"></span></p>
+    <p><span class="command"></span></p>
+    
+    
+    
+  </div>
+  
+</section>
   
   </main>
   <footer>
