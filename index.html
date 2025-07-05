@@ -205,7 +205,7 @@
     <p><span class="command">dnf</span>Replaced by dnf but still works at time of writing</p>
     <p><span class="command">hostname</span>Display or set the system's hostname (see next)</p>
     <p><span class="command">hostnamectl set-hostname</span>Recommended way to set the hostname (particularly on systemd)</p>
-    <p><span class="command">exec [command]</span>Execute a command in place of the current shell. The current shell process is replaced with the command you specify, and it does not return to the original shell once the command completes <sup title="Brackets [ ] are not part of syntax">&#128712;</sup></p>
+    <p><span class="command">exec <small>[command]</small></span>Execute a command in place of the current shell. The current shell process is replaced with the command you specify, and it does not return to the original shell once the command completes <sup title="Brackets [ ] are not part of syntax">&#128712;</sup></p>
     <p><span class="command">exec bash</span>Replaces the current shell session with a new instance of Bash</p>
     <p><span class="command">netstat</span>Powerful tool used for monitoring network connections, routing tables, and interface statistics. Commonly used as: netstat -tulpn</p>
   </div>
@@ -253,8 +253,8 @@
   <h3>Software Management</h3>
   <div class="section-commands container">
     <p><span class="command">rpm</span>RPM is not used much on newer versions of RHEL for installing packages. Still used for managing, researching, and interacting with <strong>installed</strong> packages <sup title="Red Hat Package Manager">&#128712;</sup></p>
-    <p><span class="command">dnf</span>Install, update, and manage software packages and their dependencies easily. Replaced by DNF <sup title="Yellowdog Updater Modified">&#128712;</sup></p>
-    <p><span class="command">dnf</span>Next-generation replacement for dnf, with a focus on performance and improved dependency resolution. Improved performance, better dependency management, and a more straightforward API for developers. Generally faster and uses less memory than dnf. Provides better dependency resolution and has features like transaction history, which is not present in dnf.<sup title="Dandified dnf">&#128712;</sup></p>
+    <p><span class="command">yum</span>Install, update, and manage software packages and their dependencies easily. Replaced by DNF <sup title="Yellowdog Updater Modified">&#128712;</sup></p>
+    <p><span class="command">dnf</span>Next-generation replacement for yum, with a focus on performance and improved dependency resolution. Improved performance, better dependency management, and a more straightforward API for developers. Generally faster and uses less memory than yum. Provides better dependency resolution and has features like transaction history, which is not present in yum.<sup title="Dandified dnf">&#128712;</sup></p>
     <p><span class="command">rpm -qa</span>Lists all installed packages</p>
     <p><span class="command">rpm -qf</span>Query which package a specific file belongs to. Specify <strong>path to file</strong> when using command</p>
     <p><span class="command">rpm -ql</span>List all the files installed by a specific package. This is helpful when you want to see what files a particular package has installed on your system</p>
@@ -349,9 +349,9 @@
   <h3>Troubleshooting</h3>
   <div class="section-commands">
     <p><span class="command">dmesg</span>Prints the kernel ring buffer information, which is also found in <strong>/var/log/dmesg</strong></p>
-    <p><span class="command">grep -i 'string' /path/to/your/logfile.log</span>Search for a string in the log file <sup title="-i is used for a case-insensitive search">&#128712;</sup></p>
-    <p><span class="command">grep -i 'error' /path/to/your/logfile.log | less</span>search for a particular string and pipe to less to be able to scroll up and down (ideal when the file is very busy) <sup title="-i is used for a case-insensitive search">&#128712;</sup></p>
-    <p><span class="command">tail -f /path/to/your/logfile.log</span>Monitor the log file in real time. <small>EXAMPLE:</small><strong>tail -f /var/log/messages</strong></p>
+    <p><span class="command">grep -i <small>'string' /path/to/your/logfile.log</small></span>Search for a string in the log file <sup title="-i is used for a case-insensitive search">&#128712;</sup></p>
+    <p><span class="command">grep -i <small>'error' /path/to/your/logfile.log</small> | less</span>search for a particular string and pipe to less to be able to scroll up and down (ideal when the file is very busy) <sup title="-i is used for a case-insensitive search">&#128712;</sup></p>
+    <p><span class="command">tail -f <small>/path/to/your/logfile.log</small></span>Monitor the log file in real time. <small>EXAMPLE:</small><strong>tail -f /var/log/messages</strong></p>
     <p><span class="command">w</span>Shows who is logged on, what they are doing, etc..
 The header of the the output shows (in this order): the current time, how long the system
 has been running, how many users are currently logged on, and the system load averages
@@ -361,26 +361,26 @@ for the past 1, 5, and 15 minutes <sup title="Same data as the 'uptime' command"
     <p><span class="command">mount -o remount,rw /filesystem</span>Useful in troubleshooting scenarios when a filesystem is mounted as read-only, preventing modifications. Remounting it with read-write permissions allows you to access logs, repair filesystem issues, or change configurations necessary for resolving problems</p>
     <p><span class="command">lsof</span>Lists the information about the files that are
 opened by various processes</p>
-    <p><span class="command">lsof /path/to/log/file</span>List only the processes which opened a specific file, by providing the filename as the argument</p>
+    <p><span class="command">lsof <small>/path/to/log/file</small></span>List only the processes which opened a specific file, by providing the filename as the argument</p>
     <p><span class="command">lsof -c</span>List the files opened by process names starting with a string. <small>EXAMPLE:</small> <strong>lsof -c ssh</strong></p>
-    <p><span class="command">lsof -p 'PID'</span>List all the files opened by a specific process ID</p>
+    <p><span class="command">lsof -p <small>'PID'</small></span>List all the files opened by a specific process ID</p>
     <p><span class="command">lsof -i</span>List all the network connections opened</p>
-    <p><span class="command">lsof -i :'port/protocol'</span>List all the network connections opened by port/protocol. <small>EXAMPLE:</small> <strong>lsof -i :443</strong> or <strong>lsof -i :https</strong></p>
+    <p><span class="command">lsof -i :<small>'port/protocol'</small></span>List all the network connections opened by port/protocol. <small>EXAMPLE:</small> <strong>lsof -i :443</strong> or <strong>lsof -i :https</strong></p>
     <p><span class="command">free</span>Monitor memory use and availability</p>
     <p><span class="command">ps</span>Status of running processes with a unique PID</p>
     <p><span class="command">ps -ef</span>Shows all processes (e for everything) in full format (f for long/full format)</p>
     <p><span class="command">ps -aux</span>Shows all processes for all users with CPU and memory usage</p>
-    <p><span class="command">ps -ef | grep -i 'service_name'</span>Info about a particular service</p>
+    <p><span class="command">ps -ef | grep -i <small>'service_name'</small></span>Info about a particular service</p>
     <p><span class="command">top</span>Shows all processes in real time</p>
-    <p><span class="command">top -user 'username'</span>Shows processes owned by a specific user</p>
+    <p><span class="command">top -user <small>'username'</small></span>Shows processes owned by a specific user</p>
     <p><span class="command">top -o %MEM</span>Shows processes sorted by memory usage</p>
     <p><span class="command">top -o %CPU</span>Shows processes sorted by CPU usage</p>
     <p><span class="command">iotop</span>Provides a real-time view of disk I/O usage by processes. It allows you to monitor which processes are consuming the most I/O resources on your system</p>
     <p><span class="command">renice</span>Change the priority of running processes. Each process has a nice value, which affects its scheduling priority. A lower nice value means higher priority, while a higher nice value means lower priority</p>
-    <p><span class="command">kill 'PID'</span>Sends SIGTERM (signal 15) for the specified PID, which requests the process to terminate gracefully</p>
+    <p><span class="command">kill <small>'PID'</small></span>Sends SIGTERM (signal 15) for the specified PID, which requests the process to terminate gracefully</p>
     <p><span class="command">ip a</span>Displays detailed information about the network interfaces including ip addresses</p>
-    <p><span class="command">ip a d dev 'device_name' ip.add.ress/CIDR</span>Delete ip address</p>
-    <p><span class="command">ip a a dev 'device_name' ip.add.ress/CIDR</span>Add ip address</p>
+    <p><span class="command">ip a d dev <small>'device_name' ip.add.ress/CIDR</small></span>Delete ip address</p>
+    <p><span class="command">ip a a dev <small>'device_name' ip.add.ress/CIDR</small></span>Add ip address</p>
     <p><span class="command">ip route show</span>Displays the routing table of the system. The routing table contains information that the Linux kernel uses to make decisions about where to send network packets</p>
     <p><span class="command">ip route add</span>Add a new route to the routing table</p>
     <p><span class="command">netstat -tulpn</span>Displays detailed information about network connections, listening ports, and the programs associated with them. <br>-t: Show TCP connections.
@@ -389,10 +389,10 @@ opened by various processes</p>
 <br>-p: Show the process identifier (PID) and the name of the program to which each socket belongs.
 <br>-n: Show numerical addresses instead of resolving hostnames (this speeds up output and avoids DNS lookups)</p>
     <p><span class="command">firewall-cmd --list-all</span>Displays comprehensive information about the current firewall configuration</p>
-    <p><span class="command">traceroute 'hostname'</span>Used to track the path that packets take from one host to another on the internet. It provides information about each hop along the route, including the time taken for each hop, which can help identify network bottlenecks or points of failure</p>
+    <p><span class="command">traceroute <small>'hostname'</small></span>Used to track the path that packets take from one host to another on the internet. It provides information about each hop along the route, including the time taken for each hop, which can help identify network bottlenecks or points of failure</p>
     <p><span class="command">cat /etc/services</span>List of port numbers and services</p>
     <p><span class="command">ping</span>Checks the network connectivity between your system and a specified host. It sends ICMP (Internet Control Message Protocol) echo request packets to the target host and waits for a reply</p>
-    <p><span class="command">dmidecode | grep -i 'Vendor'</span>Determine if you are working on a physical server or a VM. Retrieves hardware information from the system's DMI (Desktop Management Interface) table</p>
+    <p><span class="command">dmidecode | grep -i <small>'Vendor'</small></span>Determine if you are working on a physical server or a VM. Retrieves hardware information from the system's DMI (Desktop Management Interface) table</p>
     <p><span class="command">reboot</span>Should be your last option when troubleshooting</p>    
   </div>
   

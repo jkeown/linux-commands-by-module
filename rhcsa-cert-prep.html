@@ -53,11 +53,11 @@
       
       <p><span class="command">nmcli con show</span>Check connections / connection info</p>
       <p><span class="command">nmcli dev status</span>Get interface name</p>
-      <p><span class="command">nmcli con add con-name dhcp ifname type ethernet</span>Add dynamic connection</p>
+      <p><span class="command">nmcli con add con-name <small>dhcp</small> ifname type ethernet</span>Add dynamic connection</p>
       <p><span class="command">nmcli con up</span>Bring up connection</p>
       <p><span class="command">ping google.com -c4</span>One way to test connection connectivity</p>
       <p><span class="command">nmcli con show | grep IP4</span>Get info to set up static connection</p>
-      <p><span class="command">nmcli con add con-name static ifname type ethernet autoconnect yes ip4 gw4 ipv4.dns</span>Add static connection</p>
+      <p><span class="command">nmcli con add con-name <small>static</small> ifname type ethernet autoconnect yes ip4 gw4 ipv4.dns</span>Add static connection</p>
       
     </div>
   
@@ -87,7 +87,7 @@
       <p><span class="command">find / -type f -size +500000k -exec ls -lh {} \;</span>Find large files and long list in human-readable format</p>
       <p><span class="command">find / -type f \( -name "*.sh" -o -name "*.txt" )</span>Find files with certain extensions</p>
       <p><span class="command">find / -type f -ctime +50 -exec rm -f {} \;</span>Find files older than 50 days and delete them <small>(This can help remove those malicious files all in one go)</small></p>
-      <p><span class="command">find / -type f -ctime +50 > files.txt</span>The content can be reviewed and verified before you run a one-liner that removes the files permanently as above</p>     
+      <p><span class="command">find / -type f -ctime +50 > files.txt</span>Redirect search results to a file to be reviewed and verified before you run a one-liner that removes the files permanently as above</p>     
       <p><span class="command">Read More:</span><a href="https://www.tecmint.com/35-practical-examples-of-linux-find-command/">35 Practical Examples of Find Command</a></p>
     </div>
   
@@ -101,10 +101,10 @@
       
       <p><span class="command">hostnamectl set-hostname</span>Set machine's hostname</p>
       <p><span class="command">chage -E $(date -d +180days +%Y-%m-%d)</span>Expire user's password in a set number of days</p>
-      <p><span class="command">useradd -s /sbin/nologin</span>Non-interative shell</p>
+      <p><span class="command">useradd -s /sbin/nologin</span>Non-interactive shell</p>
       <p><span class="command">echo 'password' | passwd --stdin</span>Add user password <small>(ok for exam environment)</small></p>
       <p><span class="command">grep -i</span>Ignore case when searching <sup title="For more grep see: www.redhat.com/en/blog/how-to-use-grep">&#128712;</sup></p>
-      <p><span class="command">grep -r DIRECTORY_NAME</span>Search (recursive) all files in all subdirectories of a specific folder <sup title="For more grep see: www.redhat.com/en/blog/how-to-use-grep">&#128712;</sup></p>
+      <p><span class="command">grep -r <small>directory_name</small></span>Search (recursive) all files in all subdirectories of a specific directory <sup title="For more grep see: www.redhat.com/en/blog/how-to-use-grep">&#128712;</sup></p>
    
       <p><span class="command"></span></p>
       
