@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RHCSA Cert Prep</title>
+  <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Linux Commands" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>RHCSA CERT PREP</h1>
+  <p>Additions, Corrections, and Suggestions welcomed via Slack</p>
+  <a href="./" class="link">Module Commands</a>
+  <a href="./keyboard-commands" class="link">Keyboard Commands</a>
+</header>
+<main>
+
+  <section>
+
+    <h2>Root Password Reset</h2>
+    <h3>Quick Reference</h3>
+    
+    <div class="section-commands container">
+      
+      <p><span class="command">1.</span>Select rescue kernel and press '<strong>e</strong>' <small>(may need to hold 'shift' key to pause grub)</small></p>
+      <p><span class="command">2.</span><strong>rd.break</strong> at end of "linux" line</p>
+      <p><span class="command">3.</span><strong>ctrl + x</strong></p>
+      <p><span class="command">4.</span>'<strong>Enter</strong>' to select maintenance mode</p>
+      <p><span class="command">5.</span><strong>mount -o remount,rw /sysroot</strong></p>
+      <p><span class="command">6.</span><strong>chroot /sysroot</strong></p>
+      <p><span class="command">7.</span><strong>passwd</strong></p>
+      <p><span class="command">8.</span><strong>touch /.autorelabel</strong></p>
+      <p><span class="command">9.</span><strong>exit</strong></p>
+      <p><span class="command">10.</span><strong>exit</strong></p>
+      
+    </div>
+  
+  </section>
+
+  <section>
+
+    <h2>Network Connections</h2>
+    <h3>Quick Reference</h3>
+    
+    <div class="section-commands container">
+      
+      <p><span class="command">nmcli con show</span>Check connections / connection info</p>
+      <p><span class="command">nmcli dev status</span>Get interface name</p>
+      <p><span class="command">nmcli con add con-name dhcp ifname type ethernet</span>Add dynamic connection</p>
+      <p><span class="command">nmcli con up</span>Bring up connection</p>
+      <p><span class="command">ping google.com -c4</span>One way to test connection connectivity</p>
+      <p><span class="command">nmcli con show | grep IP4</span>Get info to set up static connection</p>
+      <p><span class="command">nmcli con add con-name static ifname type ethernet autoconnect yes ip4 gw4 ipv4.dns</span>Add static connection</p>
+      
+    </div>
+  
+  </section>
+  <section>
+
+    <h2>Grant a Group Sudo Privileges</h2>
+    <h3>Not using wheel group</h3>
+    
+    <div class="section-commands container">
+      
+      <p><span class="command">1.</span>visudo</p>
+      <p><span class="command">2.</span>%group_name ALL=(ALL) ALL</p>
+      <p><span class="command">3.</span>%group_name ALL=/path/to/specific/command <small>(Grant only specific function(s) to the group)</small></p>
+      
+    </div>
+  
+  </section>
+  <section>
+
+    <h2>Find Examples</h2>
+    <h3>Quick Reference</h3>
+    
+    <div class="section-commands container">
+      
+      <p><span class="command">find /home -type f -name file.txt -exec {} \;</span>Search home directory for file named "file.txt" and execute a command on the output</p>
+      <p><span class="command">find / -type f -size +500000k -exec ls -lh {} \;</span>Find large files and long list in human-readable format</p>
+      <p><span class="command">find / -type f \( -name "*.sh" -o -name "*.txt" )</span>Find files with certain extensions</p>
+      <p><span class="command">find / -type f -ctime +50 -exec rm -f {} \;</span>Find files older than 50 days and delete them <small>(This can help remove those malicious files all in one go)</small></p>
+      <p><span class="command">find / -type f -ctime +50 > files.txt</span>The content can be reviewed and verified before you run a one-liner that removes the files permanently as above</p>     
+      <p><span class="command">Read More:</span><a href="https://www.tecmint.com/35-practical-examples-of-linux-find-command/">35 Practical Examples of Find Command</a></p>
+    </div>
+  
+  </section>
+  <section>
+
+    <h2>Misc</h2>
+    <h3 class="empty">Layout Only</h3>
+    
+    <div class="section-commands container">
+      
+      <p><span class="command">hostnamectl set-hostname</span>Set machine's hostname</p>
+      <p><span class="command">chage -E $(date -d +180days +%Y-%m-%d)</span>Expire user's password in a set number of days</p>
+      <p><span class="command">useradd -s /sbin/nologin</span>Non-interative shell</p>
+      <p><span class="command">echo 'password' | passwd --stdin</span>Add user password <small>(ok for exam environment)</small></p>
+      <p><span class="command">grep -i</span>Ignore case when searching <sup title="For more grep see: www.redhat.com/en/blog/how-to-use-grep">&#128712;</sup></p>
+      <p><span class="command">grep -r DIRECTORY_NAME</span>Search (recursive) all files in all subdirectories of a specific folder <sup title="For more grep see: www.redhat.com/en/blog/how-to-use-grep">&#128712;</sup></p>
+   
+      <p><span class="command"></span></p>
+      
+    </div>
+  
+  </section>
+  
+</main>
+<footer>
+  <img src="batman-linux.png" alt="Batman Linux Penguin" height="100" width="100">
+  <h4>From the <span class="spray-paint"></span>&nbsp;&nbsp;&nbsp;hadows</h4>
+</footer>
+</body>
+</html>

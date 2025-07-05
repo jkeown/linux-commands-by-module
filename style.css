@@ -21,6 +21,9 @@ section h4{
   text-decoration: underline;
   margin-bottom: 1rem;
 }
+h3.empty{
+  color: transparent;
+}
 .section-commands{
   padding: 1rem;
   background: #000000;
@@ -50,7 +53,9 @@ p.footnote{
   text-underline-offset: 7px;
   text-decoration-color: hsla(255, 100%, 100%, 0.5);
 }
-
+.command a:hover{
+  color: #ff8811;
+}
 sup{
   display: none;
 }
