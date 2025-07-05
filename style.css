@@ -53,7 +53,7 @@ p.footnote{
   text-underline-offset: 7px;
   text-decoration-color: hsla(255, 100%, 100%, 0.5);
 }
-.command a:hover{
+.command + a:hover{
   color: #ff8811;
 }
 sup{
