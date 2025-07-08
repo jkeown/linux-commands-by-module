@@ -25,7 +25,7 @@
   <section>
 
     <h2>Root Password Reset</h2>
-    <h3>Quick Reference</h3>
+    <h3 class="empty">Layout Only</h3>
     
     <div class="section-commands container">
       
@@ -47,7 +47,7 @@
   <section>
 
     <h2>Network Connections</h2>
-    <h3>Quick Reference</h3>
+    <h3 class="empty">Layout Only</h3>
     
     <div class="section-commands container">
       
@@ -58,6 +58,104 @@
       <p><span class="command">ping google.com -c4</span>One way to test connection connectivity</p>
       <p><span class="command">nmcli con show | grep IP4</span>Get info to set up static connection</p>
       <p><span class="command">nmcli con add con-name <small>static</small> ifname type ethernet autoconnect yes ip4 gw4 ipv4.dns</span>Add static connection</p>
+      
+    </div>
+  
+  </section>
+  
+  <section>
+
+    <h2>SSH</h2>
+    <h3 class="empty">Layout Only</h3>
+    
+    <div class="section-commands container">
+      
+      <p><span class="command">1.</span>systemctl status sshd</p>
+      <p><span class="command">2.</span>firewall-cmd --list-all <sup title="--list-services , --list-ports">&#128712;</sup></p>
+      <p><span class="command">3.</span>firewall-cmd --add-service ssh --permanent</p>
+      <p><span class="command">4.</span>firewall-cmd --add-port=22/tcp --permanent</p>
+      <p><span class="command">5.</span>firewall-cmd --reload</p>
+      <p><span class="command">6.</span>vi /etc/ssh/sshd_config ===> PermitRootLogin yes</p>
+      <p><span class="command">7.</span>systemctl restart sshd</p>
+      <p><span class="command">8.</span>ping Gateway</p>
+      <p><span class="command">9.</span>Get IP for ssh</p>
+      <p><span class="command"></span></p>
+      <p><span class="command"></span></p>
+      <p><span class="command"></span></p>
+      
+    </div>
+  
+  </section>
+
+  <section>
+
+    <h2>Repositories</h2>
+    <h3 class="empty">Layout Only</h3>
+    
+    <div class="section-commands container">
+      
+      <p><span class="command"></span>* URL to the repo (baseurl) is only requirement to be able to set up a repo file</p>
+      <p><span class="command">Repo Directory</span>/etc/yum.repos.d/</p>
+      <p><span class="command"></span>* Repo files must have extension <strong>.repo</strong> <small>EXAMPLE:</small> redhat.repo</p>
+      <p><span class="command">Repo File Required Fields</span>
+      <br>[id]
+      <br>name=
+      <br>baseurl=
+      <br>gpgcheck=
+      <br>enabled=
+      </p>
+      <p><span class="command"></span>* <strong>gpgkey=</strong> needed if gpgcheck=1</p>
+      <p><span class="command">dnf clean all</span>Clear repository cache</p>
+      <p><span class="command">dnf repolist</span>Terse list of repositories</p>
+      <p><span class="command">dnf repoinfo</span>Detailed list of repositories</p>
+      
+    </div>
+  
+  </section>
+  <section>
+
+    <h2>Cron</h2>
+    <h3 class="empty">Layout Only</h3>
+    
+    <div class="section-commands container">
+      
+      <p><span class="command"></span>* Package: <strong>cronie</strong> , Daemon: <strong>crond</strong> , Service: <strong>cron</strong></p>
+      <p><span class="command">dnf info cronie</span>Check if installed</p>
+      <p><span class="command">dnf install -y cronie</span>Install cronie and its dependencies</p>
+      <p><span class="command">systemctl status crond</span>Check if crond is running</p>
+      <p><span class="command">systemctl start crond</span>Start crond service</p>
+      <p><span class="command">systemctl enable crond</span>Make crond persistently available</p>
+      <p><span class="command">systemctl enable --now crond</span>Start & enable crond (shortcut)
+      </p>
+      <p><span class="command">crontab -e</span>Configure a cron job in cron table</p>
+      <p><span class="command">crontab -eu</span>Configure a cron job for a specific user</p>
+      <p><span class="command">crontab -l</span>List cron table</p>
+      <p><span class="command">crontab -lu</span>List a cron table for a specific user</p>
+      <p><span class="command">cat /etc/crontab</span>Shows syntax for cron jobs</p>
+      <p><span class="command">/usr/bin/logger</span>Writes an entry in the system log. Test a cron job <sup title="Typically /var/log/syslog or /var/log/messages">&#128712;</sup></p>
+      <p><span class="command">man 5 crontab</span>Example usage</p>
+      <hr>
+      <p><span class="command">Cron Generators & Additional Info:</span>
+      <a href="https://www.uptimia.com/cron-expression-generator">Uptimia</a><a href="https://crontab.guru/">Crontab Guru</a>
+      </p>
+      
+    </div>
+  
+  </section>
+
+  <section>
+
+    <h2>Physical Extents (PE)</h2>
+    <h3>LVM</h3>
+    
+    <div class="section-commands container">
+      
+      <p><span class="command">Physical Extent (PE):</span>The fixed-size chunks into which a physical volume is divided. For example, if the PE size is 4MB, then each physical volume can be thought of as being made up of a number of 4MB blocks</p>
+      <p><span class="command">vgdisplay</span>Shows the PE Size</p>
+      <p><span class="command">vgcreate -s</span>Set the size of the PE for the Volume Group<small>EXAMPLE:</small>vgcreate -s 16M vg02 /dev/sdb1</p>
+      <p><span class="command">lvcreate -l</span>(lowercase L) Create Logical Volume size by specifying the number of Physical Extents you want to use from the Volume Group<small>EXAMPLE:</small>lvcreate -l 50 -n lv02 vg02</p>
+      <p><span class="command"></span></p>
+      <p><span class="command"></span></p>      
       
     </div>
   
@@ -79,7 +177,7 @@
   <section>
 
     <h2>Find Examples</h2>
-    <h3>Quick Reference</h3>
+    <h3 class="empty">Layout Only</h3>
     
     <div class="section-commands container">
       
@@ -105,6 +203,10 @@
       <p><span class="command">echo 'password' | passwd --stdin</span>Add user password <small>(ok for exam environment)</small></p>
       <p><span class="command">grep -i</span>Ignore case when searching <sup title="For more grep see: www.redhat.com/en/blog/how-to-use-grep">&#128712;</sup></p>
       <p><span class="command">grep -r <small>directory_name</small></span>Search (recursive) all files in all subdirectories of a specific directory <sup title="For more grep see: www.redhat.com/en/blog/how-to-use-grep">&#128712;</sup></p>
+      <p><span class="command">systemctl status</span>Check if service is running</p>
+      <p><span class="command">systemctl start</span>Start service</p>
+      <p><span class="command">systemctl enable</span>Make service persistently available</p>
+      <p><span class="command">systemctl enable --now</span>Start & enable service (shortcut)</p>
    
       <p><span class="command"></span></p>
       
