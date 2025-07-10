@@ -16,6 +16,7 @@
 <body>
 <header>
   <h1>RHCSA CERT PREP</h1>
+  <p>This page designed as more of a quick reference and may not be as detailed as other pages.</p>
   <p>Additions, Corrections, and Suggestions welcomed via Slack</p>
   <a href="./" class="link">Module Commands</a>
   <a href="./keyboard-commands" class="link">Keyboard Commands</a>
@@ -79,9 +80,6 @@
       <p><span class="command">7.</span>systemctl restart sshd</p>
       <p><span class="command">8.</span>ping Gateway</p>
       <p><span class="command">9.</span>Get IP for ssh</p>
-      <p><span class="command"></span></p>
-      <p><span class="command"></span></p>
-      <p><span class="command"></span></p>
       
     </div>
   
@@ -154,13 +152,54 @@
       <p><span class="command">Physical Extent (PE):</span>The fixed-size chunks into which a physical volume is divided. For example, if the PE size is 4MB, then each physical volume can be thought of as being made up of a number of 4MB blocks</p>
       <p><span class="command">vgdisplay</span>Shows the PE Size</p>
       <p><span class="command">vgcreate -s</span>Set the size of the PE for the Volume Group<small>EXAMPLE:</small>vgcreate -s 16M vg02 /dev/sdb1</p>
-      <p><span class="command">lvcreate -l</span>(lowercase L) Create Logical Volume size by specifying the number of Physical Extents you want to use from the Volume Group<small>EXAMPLE:</small>lvcreate -l 50 -n lv02 vg02</p>
-      <p><span class="command"></span></p>
+      <p><span class="command">lvcreate -l</span>(lowercase L) Create Logical Volume size by specifying the number of Physical Extents you want to use from the Volume Group<small>EXAMPLE:</small>lvcreate -l 50 -n lv02 vg02</p>    
+      
+    </div>
+  
+  </section>
+  
+  <section>
+
+    <h2>NTP</h2>
+    <h3>Network Time Protocol</h3>
+    
+    <div class="section-commands container">
+      <p><span class="command"></span>* Package: <strong>chrony</strong> , Daemon: <strong>chronyd</strong></p>
+      <p><span class="command">dnf info chrony</span>Check if installed</p>
+      <p><span class="command">dnf install -y chrony</span>Install chrony and its dependencies</p>
+      <p><span class="command">systemctl status chronyd</span>Check if chronyd is running</p>
+      <p><span class="command">systemctl start chronyd</span>Start chronyd service</p>
+      <p><span class="command">systemctl enable chronyd</span>Make chronyd persistently available</p>
+      <p><span class="command">systemctl enable --now chronyd</span>Start & enable chronyd (shortcut)
+      </p>
+      <p><span class="command">/etc/chrony.conf</span>Configuration file</p>
+      <p><span class="command"></span>* Generally place URL at top of file <small>EXAMPLE:</small>pool 2.rhel.pool.ntp.org iburst</p>      
+      <p><span class="command">systemctl restart chronyd</span>Restart after each change to the configuration file</p>
+      <p><span class="command">timedatectl</span>Check NTP status</p>      
+      <p><span class="command"></span>* Make sure <strong>System clock synchronized: yes</strong> is showing</p>      
+      <p><span class="command">timedatectl set-ntp yes</span>Set system clock synchronization</p>      
+      <p><span class="command">chronyc sources</span>Lists servers providing NTP info - May actually be more servers than listed</p>      
       <p><span class="command"></span></p>      
       
     </div>
   
   </section>
+  
+  <section>
+
+    <h2>TAR</h2>
+    <h3>Archiving Files</h3>
+    
+    <div class="section-commands container">
+      
+      <p><span class="command">tar -czvf /name_for_tar_file /path_to_files</span>-f needs to be last option specified because of file naming</p>
+      <p><span class="command">tar --help</span>See options info/usage (also: man tar)</p>
+      <p><span class="command"></span>* Tar files usually end with .tar.compression_method <small>EXAMPLE</small>file_name.tar.gz</p>
+      
+    </div>
+  
+  </section>
+
   <section>
 
     <h2>Grant a Group Sudo Privileges</h2>
@@ -208,6 +247,7 @@
       <p><span class="command">systemctl start</span>Start service</p>
       <p><span class="command">systemctl enable</span>Make service persistently available</p>
       <p><span class="command">systemctl enable --now</span>Start & enable service (shortcut)</p>
+      <p><span class="command">systemctl restart</span>Restart service (particularly after editing config files)</p>
    
       <p><span class="command"></span></p>
       
