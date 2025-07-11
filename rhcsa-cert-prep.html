@@ -203,6 +203,27 @@
 
   <section>
 
+    <h2>AutoFS</h2>
+    <h3 class="empty">Layout Only</h3>
+    
+    <div class="section-commands container">
+      
+      <p><span class="command">1.</span>dnf install autofs nfs-utils -y</p>
+      <p><span class="command">2.</span>/etc/auto.master</p>
+      <p><span class="command">3.</span>/etc/hosts</p>
+      <p><span class="command">4.</span>/etc/auto.home</p>
+      <p><span class="command">showmount -e</span>Lists exported file systems on a remote NFS (Network File System) server. Shows you which directories are shared and available for mounting on your local machine</p>
+      <p><span class="command">5.</span>systemctl enable --now autofs</p>
+      <p><span class="command"></span>* Start service AFTER configuration</p>
+      <p><span class="command">6.</span><strong>cd</strong> into directory to verify automounting works</p>
+      <p><span class="command">systemctl restart autofs</span>Restart service after config file changes</p>          
+      
+    </div>
+  
+  </section>
+
+  <section>
+
     <h2>Grant a Group Sudo Privileges</h2>
     <h3>Not using wheel group</h3>
     
@@ -251,8 +272,6 @@
       <p><span class="command">systemctl enable</span>Make service persistently available</p>
       <p><span class="command">systemctl enable --now</span>Start & enable service (shortcut)</p>
       <p><span class="command">systemctl restart</span>Restart service (particularly after editing config files)</p>
-   
-      <p><span class="command"></span></p>
       
     </div>
   
