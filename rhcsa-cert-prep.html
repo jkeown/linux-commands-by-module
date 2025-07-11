@@ -16,7 +16,6 @@
 <body>
 <header>
   <h1>RHCSA CERT PREP</h1>
-  <p>This page designed as more of a quick reference and may not be as detailed as other pages.</p>
   <p>Additions, Corrections, and Suggestions welcomed via Slack</p>
   <a href="./" class="link">Module Commands</a>
   <a href="./keyboard-commands" class="link">Keyboard Commands</a>
@@ -133,6 +132,8 @@
       <p><span class="command">cat /var/log/cron</span>Log file for cron jobs</p>
       <p><span class="command">/usr/bin/logger</span>Writes an entry in the system log. Test a cron job <sup title="Typically /var/log/syslog or /var/log/messages">&#128712;</sup></p>
       <p><span class="command">man 5 crontab</span>Example usage</p>
+      <p><span class="command">/var/spool/cron</span>Location for cron files</p>
+      <p><span class="command">/etc/scripts</span>A possible location for storing scripts - only root has access</p>
       <hr>
       <p><span class="command">Cron Generators & Additional Info:</span>
       <a href="https://www.uptimia.com/cron-expression-generator">Uptimia</a><a href="https://crontab.guru/">Crontab Guru</a>
@@ -238,6 +239,8 @@
     <div class="section-commands container">
       
       <p><span class="command">hostnamectl set-hostname</span>Set machine's hostname</p>
+      <p><span class="command">passwd -e</span>Expire user's password immediately</p>
+      <p><span class="command">passwd -l</span>Lock user's account immediately</p>
       <p><span class="command">chage -E $(date -d +180days +%Y-%m-%d)</span>Expire user's password in a set number of days</p>
       <p><span class="command">useradd -s /sbin/nologin</span>Non-interactive shell</p>
       <p><span class="command">echo 'password' | passwd --stdin</span>Add user password <small>(ok for exam environment)</small></p>
