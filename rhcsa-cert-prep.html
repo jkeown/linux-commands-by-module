@@ -266,6 +266,7 @@
       <p><span class="command">chage -E $(date -d +180days +%Y-%m-%d)</span>Expire user's password in a set number of days</p>
       <p><span class="command">useradd -s /sbin/nologin</span>Non-interactive shell</p>
       <p><span class="command">echo 'password' | passwd --stdin</span>Add user password <small>(ok for exam environment)</small></p>
+      <p><span class="command">echo 'user':'password' | chpasswd</span>Add user password <small>(ok for exam environment)</small></p>
       <p><span class="command">grep -i</span>Ignore case when searching <sup title="For more grep see: www.redhat.com/en/blog/how-to-use-grep">&#128712;</sup></p>
       <p><span class="command">grep -r <small>directory_name</small></span>Search (recursive) all files in all subdirectories of a specific directory <sup title="For more grep see: www.redhat.com/en/blog/how-to-use-grep">&#128712;</sup></p>
       <p><span class="command">systemctl status</span>Check if service is running</p>
