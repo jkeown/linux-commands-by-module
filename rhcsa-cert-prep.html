@@ -224,6 +224,66 @@
 
   <section>
 
+    <h2>Tuned</h2>
+    <h3>File Server Workload</h3>
+    
+    <div class="section-commands container">
+      
+      <p><span class="command">tuned-adm active</span>Show current running tuned profile</p>
+      <p><span class="command">tuned-adm recommend</span>Get recommended tuned profile</p>
+      <p><span class="command">tuned-adm profile</span>Set the running tuned profile</p>
+      <p><span class="command">dnf install -y tuned</span></p>
+      <p><span class="command">systemctl enable --now tuned</span></p>    
+      
+    </div>
+  
+  </section>
+  
+  <section>
+
+    <h2>Journald</h2>
+    <h3>systemd-journald</h3>
+    
+    <div class="section-commands container">
+      
+      <p><span class="command">journalctl</span>Displays event journal containing data from the kernel, initrd, the entire boot process, and services (shows everything since boot)</p>   
+      <p><span class="command">/run/log/journal/</span>Temporary location for journald data. NOT persistent by default</p>   
+      <p><span class="command">journalctl -u</span>Show data for a specific service / component</p>   
+      <p><span class="command">/etc/systemd/journal.conf</span>Journald config file <sup title="Can set 'Storage=persistent' or do the steps below">&#128712;</sup></p>   
+      <p><span class="command">Make Journald persistent:</span>
+        <br>1. mkdir /var/log/journal
+        <br>2. systemctl restart systemd-journald
+        <br>3. journalctl --flush (Recommended for RHEL 9)
+      </p>
+      <p><span class="command">journalctl --utc</span>Display with timestamp</p>   
+      <p><span class="command">journalctl -b</span>Show all journal entries collected since the most recent reboot</p>   
+      <p><span class="command">journalctl --list-boots</span>List the boots that journald knows about (if journald was made persistent)</p>   
+      <p><span class="command">journalctl -b 'relative pointer' or 'boot ID'</span>
+      <small>EXAMPLE: (from --list-boots)</small>
+      journalctl -b -1
+      <br>journalctl -b caf0524a1d394ce0bdbcff75b94444fe
+      </p>   
+      <div class="dropdown" id="dropdown">
+      <div class="dropdown-header">
+        <span>Additional Info</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="dropdown-content">
+        <div class="dropdown-content-inner">
+          <p>Journald data is stored in binary format.</p>
+          <p>Storing the log data in a binary format also means that the data can be displayed in arbitrary output formats depending on what you need at the moment.</p>
+          <p>For instance, for daily log management you may be used to viewing the logs in the standard syslog format, but if you decide to graph service interruptions later on, you can output each entry as a JSON object to make it consumable to your graphing service.</p>
+          <p>Since the data is not written to disk in plain text, no conversion is needed when you need a different on-demand format.</p>
+          <p><span class="command">Read More:</span><a href="https://www.digitalocean.com/community/tutorials/how-to-use-journalctl-to-view-and-manipulate-systemd-logs">Sourced from Digital Ocean</a></p>       
+        </div>
+      </div>
+    </div><!-- dropdown section-->
+    </div>
+  
+  </section>
+
+  <section>
+
     <h2>Grant a Group Sudo Privileges</h2>
     <h3>Not using wheel group</h3>
     
@@ -236,6 +296,7 @@
     </div>
   
   </section>
+
   <section>
 
     <h2>Find Examples</h2>
@@ -284,5 +345,7 @@
   <img src="batman-linux.png" alt="Batman Linux Penguin" height="100" width="100">
   <h4>From the <span class="spray-paint"></span>&nbsp;&nbsp;&nbsp;hadows</h4>
 </footer>
+
+<script src="app.js"></script>
 </body>
 </html>
