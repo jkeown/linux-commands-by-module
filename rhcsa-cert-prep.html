@@ -261,7 +261,8 @@
       
       <p><span class="command">hostnamectl set-hostname</span>Set machine's hostname</p>
       <p><span class="command">passwd -e</span>Expire user's password immediately</p>
-      <p><span class="command">passwd -l</span>Lock user's account immediately</p>
+      <p><span class="command">passwd -l</span>Lock user's password</p>
+      <p><span class="command">usermod -L</span>Lock user's account immediately</p>
       <p><span class="command">chage -E $(date -d +180days +%Y-%m-%d)</span>Expire user's password in a set number of days</p>
       <p><span class="command">useradd -s /sbin/nologin</span>Non-interactive shell</p>
       <p><span class="command">echo 'password' | passwd --stdin</span>Add user password <small>(ok for exam environment)</small></p>
