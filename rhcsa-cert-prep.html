@@ -242,6 +242,25 @@
   
   <section>
 
+    <h2>SELinux</h2>
+    <h3>Security-Enhanced Linux</h3>
+    
+    <div class="section-commands container">
+      
+      <p><span class="command">semanage</span>Configure SELinux policies</p>   
+      <p><span class="command">semanage port --list</span>List all ports and their associated SELinux contexts. Use with grep for filtering</p>   
+      <p><span class="command">sestatus</span>Displays current status of SELinux</p>   
+      <p><span class="command">getenforce</span>Check the current mode of SELinux</p>   
+      <p><span class="command">setenforce</span>Change the SELinux mode to permissive (0) or enforcing (1)</p>   
+      <p><span class="command">semanage port -a -t http_port_t -p tcp 8761</span>This example is modifiyng the port policy with -a (adding to current policy) for the label (-t) http_port_t. Adding the tcp protocol (-p) at port 8761</p>   
+      <p><span class="command">/etc/selinux/config</span>The SELinux configuration file. Editing this file is the only way to "disable" SElinux (reboot required). You will need to edit this file again to set SELinux back to "enforcing".  <strong>setenforce 1</strong> will not work when the config file is set to disabled <sup title="Most likely will never need to disable SELinux">&#128712;</sup></p>   
+      
+    </div>
+  
+  </section>
+  
+  <section>
+
     <h2>Journald</h2>
     <h3>systemd-journald</h3>
     
