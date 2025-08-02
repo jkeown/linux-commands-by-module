@@ -77,10 +77,105 @@
   <section>
 
     <h2>Vi Commands</h2>
-    <h3>Coming Soon...</h3>
+    <h3>(from VIM Tutor)</h3>
     
     <div class="section-commands container">
-      
+      <p><span class="command">Special Note:</span>Many commands can be multiplied. For example, the <strong>dd</strong> command will delete a line.  Entering <strong>d5d</strong> will delete 5 lines.</p>
+      <hr>
+      <p><span class="command">h</span>Move cursor left</p>
+      <p><span class="command">k</span>Move cursor up</p>
+      <p><span class="command">l</span>Move cursor right</p>
+      <p><span class="command">j</span>Move cursor down</p>
+      <p><span class="command">$</span>Move cursor to end of the line</p>
+      <p><span class="command">Esc key</span>Normal Mode</p>
+      <p><span class="command">:q!</span>Exits vi editor without saving changes</p>
+      <p><span class="command">x</span>Deletes character under the cursor</p>
+      <p><span class="command">i</span>Insert text mode <small>(Escape key to exit insert mode)</small></p>
+      <p><span class="command">A</span>Append text to end of line</p>
+      <p><span class="command">:wq</span>Save the file and exit</p>
+      <p><span class="command">shift + zz</span>Save the file and exit</p>
+      <p><span class="command">dw</span>Delete word from the cursor position until the start of the next word, EXCLUDING its first character <sup title="The letter  d  will appear on the last line of the screen as you type
+        it.  Vim is waiting for you to type  w">&#128712;</sup></p>
+        <p><span class="command">de</span>Deletes everything from the cursor to the end of the current word, INCLUDING the last character</p>
+        <p><span class="command">d$</span>Deletes everything from the cursor to the end of the line, INCLUDING the last character</p>
+      <p><span class="command">&lt;num&gt; w</span>Move cursor a "number" of words forward 
+        <small>EXAMPLE</small>2w moves the cursor forward 2 words
+      </p>
+      <p><span class="command">&lt;num&gt; e</span>Move cursor <strong>to the end</strong> a "number" of words forward 
+        <small>EXAMPLE</small>3e moves the cursor to the end of the third word forward </p>
+        <p><span class="command">0 (number zero)</span>Move cursor to the start of the line </p>
+      <p><span class="command">d &lt;num&gt; w</span>Deletes a "number" of words
+        <small>EXAMPLE</small>d2w deletes 2 words
+      </p> 
+      <p><span class="command">dd</span>Deletes the whole line - Also functions like "cut"</p>
+      <p><span class="command">u</span>Undo the last command(s)</p>
+      <p><span class="command">U</span>Undo an entire line of command(s)</p>
+      <p><span class="command">ctrl + r</span>Redo the command(s) - Undo an undo</p>
+      <p><span class="command">p</span>Paste text on the next line after the cursor</p>
+      <p><span class="command">r &lt;char&gt;</span>Replace the character under the cursor
+      <small>EXAMPLE</small>rx would replace the character with the x character
+      </p>
+      <p><span class="command">ce</span>Deletes from cursor to end of word and enters INSERT Mode</p>
+      <p><span class="command">cc</span>Deletes the entire line and enters INSERT Mode</p>
+      <p><span class="command">c$</span>Deletes from cursor to end of line and enters INSERT Mode</p>
+      <p><span class="command">ctrl + g</span>Show your location in file</p>
+      <p><span class="command">shift + g</span>Move cursor to end of file</p>
+      <p><span class="command">gg</span>Move cursor to start of file</p>
+      <p><span class="command">&lt;num&gt; shift + g</span>Go to line number you entered</p>
+      <p><span class="command">/, n, N, ?</span>Search functions are the same as man pages</p>
+      <p><span class="command">ctrl + o</span>Go back to previous position (letter O not zero)</p>
+      <p><span class="command">ctrl + o</span>Go forward to previous position</p>
+      <p><span class="command">%</span>When cursor is over a parentheses or bracket, it will move the cursor to the matching enclosing glyph -- *Useful in debugging a program with unmatched parentheses!</p>
+      <p><span class="command">:s/new/old</span>Replace the first occurrence of the "old" word with "new" word in the line</p>
+      <p><span class="command">:s/new/old/g</span>Replace all"old" words with "new" word in the line</p>
+      <p><span class="command">:#,#s/new/old/g</span>Replace all "old" words with "new" word between the specified lines</p>
+      <p><span class="command">:%s/new/old/g</span>Replace all "old" words with "new" word in the file</p>
+      <p><span class="command">:%s/new/old/gc</span>Replace all "old" words with "new" word in the file but ask for confirmation each time</p>
+      <p><span class="command">:! &lt;command&gt;</span>Execute any terminal command from vi <small>EXAMPLE:</small>:!ls (no space) -- Pressing ENTER afterwards returns to vi</p>
+      <p><span class="command">:w &lt;file_name&gt;</span>Saves the file under specified name</p>
+      <p><span class="command">v</span>Starts Visual Selection aka Highlighting text. Move cursor to highlight text. You can then perform a task on the highlighted text such as deletion or saving a portion of the text in a new file</p>
+      <p><span class="command">:r &lt;file_name&gt;</span>Insert contents from another file</p>
+      <p><span class="command">:r !&lt;command&gt;</span>Insert the output of an external command
+      <small>EXAMPLE:</small>:r !date
+      </p>
+      <p><span class="command">o</span>Start a line below cursor in Insert mode (letter O not zero)</p>
+      <p><span class="command">shift + o</span>Start a line above cursor in Insert mode (capital O not zero)</p>
+      <p><span class="command">a</span>Append text after the cursor</p>
+      <p><span class="command"></span>NOTE:  a, i and A all go to the same Insert mode, the only difference is where
+       the characters are inserted.</p>
+      <p><span class="command">shift + r</span>Replace mode starting at cursor position. Add new characters by typing over old characters</p>
+      <p><span class="command">y</span>copy</p>
+      <p><span class="command">p</span>paste</p>
+      <p><span class="command">:set ic</span>Ignore case when searching</p>
+      <p><span class="command">:set is</span>Show partial matches for search phrase</p>
+      <p><span class="command">:set hls</span>Highlight all matching search phrases</p>
+      <p><span class="command">:set no&lt;option&gt;</span>Turn off an option <small>EXAMPLE:</small>:set nohls</p>
+      <p><span class="command">:help</span>Help menu</p>
+      <p><span class="command">:help &lt;option&gt;</span>Help for specific option</p>
+      <p><span class="command">ctrl + w</span>Toggle help windows</p>
+      <p><span class="command">:q</span>Quit help</p>
+      <p><span class="command">Command line completion with CTRL-D and &lt;TAB&gt;</span>
+      Type the start of a command: &nbsp;&nbsp; :e <br>
+      Press  CTRL-D  and Vim will show a list of commands that start with "e" <br>
+      Type  d&lt;TAB&gt;  and Vim will complete the command name to ":edit"
+      </p>
+      <p><span class="command"></span></p>
+      <p><span class="command"></span></p>
+      <p><span class="command"></span></p>
+      <p><span class="command"></span></p>
+      <p><span class="command"></span></p>
+      <p><span class="command"></span></p>
+      <p><span class="command"></span></p>
+      <p><span class="command"></span></p>
+      <p><span class="command"></span></p>
+      <p><span class="command"></span></p>
+      <p><span class="command"></span></p>
+      <p><span class="command"></span></p>
+      <p><span class="command"></span></p>
+      <p><span class="command"></span></p>
+      <p><span class="command"></span></p>
+      <p><span class="command"></span></p>
+
     </div>
   
   </section>

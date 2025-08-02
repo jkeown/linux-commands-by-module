@@ -128,7 +128,7 @@
       <p><span class="command">crontab -eu</span>Configure a cron job for a specific user</p>
       <p><span class="command">crontab -l</span>List cron table</p>
       <p><span class="command">crontab -lu</span>List a cron table for a specific user</p>
-      <p><span class="command">cat /etc/crontab</span>Shows syntax for cron jobs</p>
+      <p><span class="command">cat /etc/crontab</span>Add cron tasks that will run for all users.Also, shows syntax for cron jobs</p>
       <p><span class="command">cat /var/log/cron</span>Log file for cron jobs</p>
       <p><span class="command">/usr/bin/logger</span>Writes an entry in the system log. Test a cron job <sup title="Typically /var/log/syslog or /var/log/messages">&#128712;</sup></p>
       <p><span class="command">man 5 crontab</span>Example usage</p>
@@ -178,7 +178,7 @@
       <p><span class="command">systemctl restart chronyd</span>Restart after each change to the configuration file</p>
       <p><span class="command">timedatectl</span>Check NTP status</p>      
       <p><span class="command"></span>* Make sure <strong>System clock synchronized: yes</strong> is showing</p>      
-      <p><span class="command">timedatectl set-ntp yes</span>Set system clock synchronization</p>      
+      <p><span class="command">timedatectl set-ntp true/false</span>Set system clock synchronization</p>      
       <p><span class="command">chronyc sources</span>Lists servers providing NTP info - May actually be more servers than listed</p>      
       <p><span class="command"></span></p>      
       
@@ -208,14 +208,16 @@
     
     <div class="section-commands container">
       
-      <p><span class="command">1.</span>dnf install autofs nfs-utils -y</p>
-      <p><span class="command">2.</span>/etc/auto.master</p>
-      <p><span class="command">3.</span>/etc/hosts</p>
-      <p><span class="command">4.</span>/etc/auto.home</p>
+      <p><span class="command">Check if autofs is installed</span>dnf info, rpm -qa | grep package_name, or which</p>
+      <p><span class="command">dnf install autofs nfs-utils -y</span>The nfs-utils package is needed along  with autofs</p>
+      <p><span class="command">rpm -ql package_name</span>Lists all the files installed by the package, including any executables</p>
+      <p><span class="command">/etc/auto.master</span>The master map file -- Needs the mount point and the name of the map file containing instructions</p>
+      <p><span class="command">/etc/hosts</span>Only if aliasing the IP</p>
+      <p><span class="command">/etc/auto.misc</span>The map file specifying the automounted directory, the remote source, and mount options  (/etc/auto.home in the slides) -- Can be arbitrarily named as long as the same file name is referenced in auto.master</p>
       <p><span class="command">showmount -e</span>Lists exported file systems on a remote NFS (Network File System) server. Shows you which directories are shared and available for mounting on your local machine</p>
-      <p><span class="command">5.</span>systemctl enable --now autofs</p>
-      <p><span class="command"></span>* Start service AFTER configuration</p>
-      <p><span class="command">6.</span><strong>cd</strong> into directory to verify automounting works</p>
+      <p><span class="command">systemctl enable --now autofs</span>* Start service AFTER configuration</p>
+      <p><span class="command"></span><strong>cd</strong> into directory to verify automounting works</p>
+      <p><span class="command">df -h</span>To check the directory is mounted</p>
       <p><span class="command">systemctl restart autofs</span>Restart service after config file changes</p>          
       
     </div>
