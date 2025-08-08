@@ -286,6 +286,10 @@
         <br style="margin-bottom: 1rem;">
         <small>COMMON OPTIONS:</small>
         --name: Specifiy the name for the container process <br>
+        -e: set environment variables <br>
+        -p: publish a container's port / range of ports to the host <br>
+        --rm: Automatically remove the container when exited. Default is false <br>
+        -v: (Volume) Create a bind mount. If you specify /HOST-DIR:/CONTAINER-DIR then Podman bind mounts HOST-DIR in the host to CONTAINER-DIR in the Podman container
         -i: "interactive." It keeps STDIN open even if not attached, allowing you to interact with the container's shell or process <br>
         -t: allows for a terminal interface. It is often used in conjunction with -i to provide an interactive shell session
         <br style="margin-bottom: 1rem;">
