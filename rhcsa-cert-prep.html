@@ -279,7 +279,8 @@
       <p><span class="command">podman ps</span>Show running containers</p>
       <p><span class="command">podman ps -a</span>Show all containers</p>
       <p><span class="command">podman rm</span>Remove one or more containers</p>
-      <p><span class="command">podman rmi</span>Remove one or more locally stored images (Images can be deleted after container creation)</p>
+      <p><span class="command">podman rmi</span>Remove one or more locally stored images</p>
+      <p><span class="command">podman rmi -f</span>Forcefully remove one or more locally stored images. <strong>This also removes ALL associated containers</strong></p>
       <p><span class="command">podman system df</span>Show podman disk usage</p>
       <p><span class="command">podman run -d -p &lt;port&gt; &lt;Image_name_or_id&gt;</span>Run a container. <strong>-d</strong> (detached) runs the container in the background so you still have terminal access (Starts a 'new' container) <sup title="Not all containers need a port">&#128712;</sup><br>
         <br style="margin-bottom: 1rem;">
