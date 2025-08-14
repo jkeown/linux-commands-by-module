@@ -193,4 +193,8 @@ footer h4{
     flex: 1 0 32%;
     max-width: 33%;
   }
+  .cert-prep section{
+    flex: 1 0 49%;
+    max-width: unset;
+  }
 }

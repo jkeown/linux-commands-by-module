@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="cert-prep">
 <header>
   <h1>RHCSA CERT PREP</h1>
   <p>Additions, Corrections, and Suggestions welcomed via Slack</p>
@@ -254,9 +254,55 @@
       <p><span class="command">sestatus</span>Displays current status of SELinux</p>   
       <p><span class="command">getenforce</span>Check the current mode of SELinux</p>   
       <p><span class="command">setenforce</span>Change the SELinux mode to permissive (0) or enforcing (1)</p>   
-      <p><span class="command">semanage port -a -t http_port_t -p tcp 8761</span>This example is modifiyng the port policy with -a (adding to current policy) for the label (-t) http_port_t. Adding the tcp protocol (-p) at port 8761</p>   
       <p><span class="command">/etc/selinux/config</span>The SELinux configuration file. Editing this file is the only way to "disable" SElinux (reboot required). You will need to edit this file again to set SELinux back to "enforcing".  <strong>setenforce 1</strong> will not work when the config file is set to disabled <sup title="Most likely will never need to disable SELinux">&#128712;</sup></p>   
-      
+      <p><span class="command">semanage port -a -t http_port_t -p tcp 8761</span>This example is modifiyng the port policy with -a (adding to current policy) for the label (-t) http_port_t. Adding the tcp protocol (-p) at port 8761</p>   
+      <p><span class="command">semanage fcontext -a -t http_sys_content_t "/mydir(/.*)?</span>This example adds file-context to everything under the specified directory. Writes only to the policy. See below: <strong>restorecon</strong></p>
+      <p><span class="command">restorecon -R -v &lt;file&gt;</span>After changing the policy with <strong>semanage</strong>, restorecon applies the policy to the file system. <strong>ALWAYS</strong> need to execute restorecon after changing file policy</p>   
+      <p><span class="command">-Z (capital Z)</span>Use the -Z option to display SELinux context settings. Use with commands such as ls, id, ps, ss, etc..</p>   
+      <p><span class="command">chcon</span>Used to set context type the same as <strong>semanage</strong>. Use it only in specific cases - <strong>should normally be avoided</strong> - does not survive if file system is relabeled </p>   
+      <p><span class="command">man semanage-fcontext</span>Has useful examples at bottom of the man page to help on the exam</p>   
+      <p><span class="command">/var/log/audit/audit.log</span>SELinux log data -- Useful for diagnosing SELinux problems</p>   
+      <p><span class="command">sealert -a /var/log/audit/audit.log</span>Helps to search for SELinux issues in the log data and also provides recommended fixes. This command was not initially installed (remember the dnf process &#128521;)</p>   
+      <p><span class="command">ausearch</span>(audit search) Another method to analyze SELinux problems. The following example searches by "messages" marked "avc". AVC (Access Vector Cache) denials are messages logged when a process attempts to access a resource but is denied due to SELinux policy rules
+      <small>EXAMPLE:</small>
+       ausearch -m avc 
+      </p>   
+      <hr>
+      <p><span class="command">Additional recommended reading:</span>
+      <a href="https://doc-rhel-rhcsa-prep.readthedocs.io/en/latest/security/selinux.html">Basic Features of SELinux</a>
+      <a href="https://doc-rhel-rhcsa-prep.readthedocs.io/en/latest/security/selinux.html#finding-the-context-type-you-need">Finding the Correct Context</a>
+      </p>
+
+      <div class="dropdown">
+      <div class="dropdown-header">
+        <span>Additional AVC / ausearch Info</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="dropdown-content">
+        <div class="dropdown-content-inner">
+          <p><small>Source: YT Genius AI</small></p>
+          <p>In the context of SELinux, AVC (Access Vector Cache) denials are messages logged when a process attempts to access a resource but is denied due to SELinux policy rules. These AVC messages detail the security context of both the subject (the process trying to access a resource) and the object (the resource being accessed), which can be essential for troubleshooting permission issues.</p>
+
+          <p>When using the ausearch command to examine logs, you might see AVC messages formatted like this:</p>
+          <code>
+            type=AVC msg=audit(1580397837.344:274): avc: denied { getattr } for pid=1067 comm="httpd" path="/var/myserver/services" dev="dm-0" ino=655836 scontext=system_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:var_t:s0 tclass=file permissive=0
+          </code>
+          <br><br>
+          <p>Here's a breakdown of the components:</p>
+            <ul>
+
+              <li><strong>scontext</strong>: The security context of the subject attempting access.</li>
+              <li><strong>tcontext</strong>: The security context of the target object.</li>
+              <li><strong>tclass</strong>: The type of object (e.g., file, directory).</li>
+              <li><strong>avc: denied</strong>: Indicates that the action was denied by SELinux policy.</li>
+            </ul>
+
+          <p>These AVC denials are critical for understanding why a certain action was blocked and can guide you in creating or modifying policies to allow necessary access.</p>
+
+          <p>If you're managing SELinux, checking for AVC denials can help you diagnose issues and modify your policies accordingly to ensure services run smoothly while maintaining security.</p>
+        </div>
+      </div>
+    </div><!-- dropdown section-->
     </div>
   
   </section>
@@ -335,7 +381,7 @@
       journalctl -b -1
       <br>journalctl -b caf0524a1d394ce0bdbcff75b94444fe
       </p>   
-      <div class="dropdown" id="dropdown">
+      <div class="dropdown">
       <div class="dropdown-header">
         <span>Additional Info</span>
         <span class="arrow">▼</span>
